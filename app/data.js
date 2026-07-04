@@ -691,6 +691,48 @@ window.CALENDER_DATA = {
           "halfDays": [],
           "verify": false,
           "source": "https://www.montville.net/documents/calendars/printable-calendars/424761"
+        },
+        {
+          "id": "westfield-nj",
+          "name": "Westfield Public Schools",
+          "chapterCity": "Westfield",
+          "state": "NJ",
+          "firstDay": "2026-09-01",
+          "lastDay": "2027-06-16",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-16",
+          "teacherWorkdays": [],
+          "halfDays": [
+            "2026-09-04",
+            "2026-11-04",
+            "2026-11-25",
+            "2026-12-23",
+            "2027-04-16",
+            "2027-06-15",
+            "2027-06-16"
+          ],
+          "verify": false,
+          "source": "https://www.westfieldnjk12.org/documents/district-information/calendars---academic-&-holiday/316856"
+        },
+        {
+          "id": "hoboken-nj",
+          "name": "Hoboken Public Schools",
+          "chapterCity": "Hoboken",
+          "state": "NJ",
+          "firstDay": "2026-09-08",
+          "lastDay": "2027-06-18",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-26 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-18",
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.hoboken.k12.nj.us/board_of_education/26-27_b_o_e_approved_calendar"
         }
       ],
       "coverage": "Bergen to Ocean County, NJ"
