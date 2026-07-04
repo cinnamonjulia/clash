@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#fff5f9; --card:#ffffff; --ink:#161046; --ink-soft:#6e6a93; --line:#f1dde9;
+    --bg:#1a03b5; --card:#ffffff; --ink:#161046; --ink-soft:#6e6a93; --line:#ececf6;
     --brand:#fb2461; --brand-soft:#ffe2ec;
     --nc:#1a03b5; --off:#128a4e; --off-bg:#e3f7ea; --in:#d8390a; --in-bg:#fde7de;
     --wknd:#0c8e92; --wknd-bg:#ddf5f3; --warn:#8a6b00; --warn-bg:#fdf6c9; --pend:#1a03b5; --pend-bg:#dbe8ff;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg:#0c0a2e; --card:#171445; --ink:#f4f2ff; --ink-soft:#aab0da; --line:#2a2760;
-      --brand:#ff5286; --brand-soft:#3a1830; --nc:#6ea0ff;
-      --off:#43d08a; --off-bg:#123a2a; --in:#ff7a4d; --in-bg:#3e2018;
-      --wknd:#46d6ce; --wknd-bg:#0f3a38; --warn:#e4c94f; --warn-bg:#332e10;
-      --pend:#6ea0ff; --pend-bg:#16264c;
+      --bg:#1a03b5; --card:#ffffff; --ink:#161046; --ink-soft:#6e6a93; --line:#ececf6;
+      --brand:#fb2461; --brand-soft:#ffe2ec; --nc:#1a03b5;
+      --off:#128a4e; --off-bg:#e3f7ea; --in:#d8390a; --in-bg:#fde7de;
+      --wknd:#0c8e92; --wknd-bg:#ddf5f3; --warn:#8a6b00; --warn-bg:#fdf6c9;
+      --pend:#1a03b5; --pend-bg:#dbe8ff;
     }
   }
   * { box-sizing:border-box; }
@@ -97,9 +97,13 @@
   .rcard:hover { border-color:var(--brand); box-shadow:0 5px 16px rgba(251,36,97,.14); }
   .hub { background:var(--brand-soft); color:var(--brand); }
   body { background:
-     radial-gradient(1100px 480px at 100% -8%, rgba(251,36,97,.07), transparent 60%),
-     radial-gradient(900px 460px at -5% 8%, rgba(37,228,222,.06), transparent 55%),
+     radial-gradient(1100px 520px at 50% -12%, rgba(255,255,255,.12), transparent 60%),
      var(--bg); background-attachment:fixed; }
+  /* text that sits directly on the blue backdrop */
+  header .sub, .picker label, footer { color:#cfd2ff; }
+  footer .warn, footer { opacity:.95; }
+  .card { box-shadow:0 12px 34px rgba(5,2,45,.32); }
+  input[type=date], .result { background:#f2f2fb; }
 </style>
 </head>
 <body>
