@@ -733,6 +733,72 @@ window.CALENDER_DATA = {
           "halfDays": [],
           "verify": false,
           "source": "https://www.hoboken.k12.nj.us/board_of_education/26-27_b_o_e_approved_calendar"
+        },
+        {
+          "id": "glenrock-nj",
+          "name": "Glen Rock Public Schools",
+          "chapterCity": "Glen Rock",
+          "state": "NJ",
+          "firstDay": "2026-09-08",
+          "lastDay": "2027-06-22",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-22",
+          "teacherWorkdays": [],
+          "halfDays": [
+            "2027-06-21",
+            "2027-06-22"
+          ],
+          "verify": false,
+          "source": "https://www.glenrocknj.org/page/district-calendars"
+        },
+        {
+          "id": "bernards-nj",
+          "name": "Bernards Township Schools",
+          "chapterCity": "Basking Ridge",
+          "state": "NJ",
+          "firstDay": "2026-09-08",
+          "lastDay": "2027-06-23",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-04-12 to 2027-04-16",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-22",
+          "teacherWorkdays": [],
+          "halfDays": [
+            "2026-11-25",
+            "2026-12-23"
+          ],
+          "verify": false,
+          "source": "https://bernardsboe.ss5.sharpschool.com/district_information/district_calendar"
+        },
+        {
+          "id": "jerseycity-nj",
+          "name": "Jersey City Public Schools",
+          "chapterCity": "Jersey City",
+          "state": "NJ",
+          "firstDay": "2026-09-10",
+          "lastDay": "2027-06-24",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-26 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [
+            "2026-11-25",
+            "2026-12-23",
+            "2027-03-25",
+            "2027-05-28",
+            "2027-06-22",
+            "2027-06-23",
+            "2027-06-24"
+          ],
+          "verify": true,
+          "source": "https://www.jcboe.org/apps/pages/index.jsp?uREC_ID=1780572&type=d&pREC_ID=2249276",
+          "verifyNote": "Calendar is the 2/9/26 board DRAFT \u2014 confirm final adopted version (esp. last day June 24)."
         }
       ],
       "coverage": "Bergen to Ocean County, NJ"
