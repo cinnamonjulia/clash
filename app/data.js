@@ -709,9 +709,19 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Los Angeles",
-        "San Diego"
+        "West Los Angeles",
+        "Sherman Oaks",
+        "Northridge/West Hills",
+        "Manhattan Beach",
+        "Long Beach",
+        "Westlake/Ventura",
+        "Santa Barbara",
+        "Orange County (Santa Ana)",
+        "San Diego",
+        "Poway"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "LA, Orange County, San Diego, Ventura & Santa Barbara"
     },
     {
       "id": "rocky-mountain",
@@ -760,10 +770,22 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Los Angeles",
-        "San Fernando Valley"
+        "San Francisco",
+        "Oakland",
+        "Berkeley",
+        "San Rafael (Marin)",
+        "Palo Alto",
+        "San Jose",
+        "San Mateo/Foster City",
+        "Sunnyvale/Cupertino",
+        "Walnut Creek/Danville",
+        "Saratoga",
+        "Sacramento",
+        "Humboldt County",
+        "Tahoe"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "SF Bay Area & Northern California"
     }
   ]
 };

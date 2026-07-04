@@ -201,7 +201,7 @@
     const statesLine=(r.states||[]).map(s=>STATE_NAMES[s]||s).join(" · ");
     if(r.status!=="populated"){
       view.innerHTML='<section class="card"><div class="pendbox"><div class="big">⏳</div>'+
-        '<h3>'+r.name+'</h3><p>'+(statesLine||"")+'</p>'+
+        '<h3>'+r.name+'</h3><p>'+(r.coverage||statesLine||"")+'</p>'+
         '<p>School dates for this region are still being gathered.<br>Known chapter areas:</p>'+
         '<div class="hublist">'+(r.hubs||[]).map(h=>'<span class="hub">'+h+'</span>').join("")+'</div></div></section>';
       return;
