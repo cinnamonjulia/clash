@@ -4,18 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CalendER — BBYO School Dates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#f5f6fb; --card:#fff; --ink:#1e2140; --ink-soft:#5f6488; --line:#e6e7f2;
-    --brand:#4f5bd5; --brand-soft:#eceeff;
-    --nc:#3f7fd6; --off:#2f9e6f; --off-bg:#e7f6ee; --in:#c05a6b; --in-bg:#fbecef;
-    --wknd:#7a7fb0; --wknd-bg:#eeeffa; --warn:#b8862a; --warn-bg:#fcf3e0; --pend:#8a6fc0; --pend-bg:#f0ebfa;
+    --bg:#fff5f9; --card:#ffffff; --ink:#161046; --ink-soft:#6e6a93; --line:#f1dde9;
+    --brand:#fb2461; --brand-soft:#ffe2ec;
+    --nc:#1a03b5; --off:#128a4e; --off-bg:#e3f7ea; --in:#d8390a; --in-bg:#fde7de;
+    --wknd:#3a34c4; --wknd-bg:#e6e7ff; --warn:#b8862a; --warn-bg:#fcf3e0; --pend:#b4177e; --pend-bg:#fce3f1;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg:#14162a; --card:#1f2140; --ink:#eef0ff; --ink-soft:#a4a8d0; --line:#2c2f52;
-      --brand:#8b95ff; --brand-soft:#24284d; --off-bg:#163a2b; --in-bg:#3a1f27;
-      --wknd-bg:#23264a; --warn-bg:#362c17; --pend-bg:#2a2440;
+      --bg:#140a38; --card:#221a50; --ink:#fbeff6; --ink-soft:#b7afd9; --line:#352a63;
+      --brand:#ff5286; --brand-soft:#3e2044; --nc:#7c8bff;
+      --off:#43d08a; --off-bg:#123a2a; --in:#ff7a4d; --in-bg:#3e2018;
+      --wknd:#9aa0ff; --wknd-bg:#23264f; --warn:#e4b45a; --warn-bg:#362c17;
+      --pend:#ff7fc0; --pend-bg:#3a1e38;
     }
   }
   * { box-sizing:border-box; }
@@ -72,6 +77,29 @@
   .hublist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px; }
   .hub { font-size:12.5px; padding:5px 11px; border-radius:999px; background:var(--brand-soft); color:var(--brand); font-weight:600; }
   footer { margin-top:34px; color:var(--ink-soft); font-size:12.5px; text-align:center; }
+  /* --- BBYO brand: condensed display type + rounded shapes --- */
+  h1, h2, .state-group h3, .rcard .rn, .district .name, .filters button,
+  select#region, .badge, .chip, .st, .pendbox h3, .picker label {
+    font-family:"Oswald","Arial Narrow",-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  header h1 { text-transform:uppercase; font-weight:700; letter-spacing:.5px; font-size:42px;
+    background:linear-gradient(92deg,var(--brand) 0%, #7a2bd6 55%, #1a03b5 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  header .sub { font-size:15.5px; }
+  h2 { text-transform:uppercase; font-weight:700; letter-spacing:.4px; font-size:20px; }
+  .state-group h3 { font-weight:600; font-size:14px; }
+  .filters button, .badge, .chip, .st { text-transform:uppercase; letter-spacing:.4px; font-weight:600; }
+  .picker label { text-transform:uppercase; letter-spacing:.5px; }
+  .card { border-radius:22px; box-shadow:0 6px 22px rgba(251,36,97,.07); }
+  .district, .rcard, .result { border-radius:16px; }
+  select#region { border-radius:14px; font-weight:600; font-size:17px; }
+  .filters button.active { box-shadow:0 5px 16px rgba(251,36,97,.32); }
+  .rcard:hover { border-color:var(--brand); box-shadow:0 5px 16px rgba(251,36,97,.14); }
+  .hub { background:var(--brand-soft); color:var(--brand); }
+  body { background:
+     radial-gradient(1100px 480px at 100% -8%, rgba(251,36,97,.07), transparent 60%),
+     radial-gradient(900px 460px at -5% 8%, rgba(26,3,181,.05), transparent 55%),
+     var(--bg); background-attachment:fixed; }
 </style>
 </head>
 <body>
