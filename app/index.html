@@ -12,15 +12,15 @@
     --bg:#fff5f9; --card:#ffffff; --ink:#161046; --ink-soft:#6e6a93; --line:#f1dde9;
     --brand:#fb2461; --brand-soft:#ffe2ec;
     --nc:#1a03b5; --off:#128a4e; --off-bg:#e3f7ea; --in:#d8390a; --in-bg:#fde7de;
-    --wknd:#3a34c4; --wknd-bg:#e6e7ff; --warn:#b8862a; --warn-bg:#fcf3e0; --pend:#b4177e; --pend-bg:#fce3f1;
+    --wknd:#0c8e92; --wknd-bg:#ddf5f3; --warn:#8a6b00; --warn-bg:#fdf6c9; --pend:#1a03b5; --pend-bg:#dbe8ff;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg:#140a38; --card:#221a50; --ink:#fbeff6; --ink-soft:#b7afd9; --line:#352a63;
-      --brand:#ff5286; --brand-soft:#3e2044; --nc:#7c8bff;
+      --bg:#0c0a2e; --card:#171445; --ink:#f4f2ff; --ink-soft:#aab0da; --line:#2a2760;
+      --brand:#ff5286; --brand-soft:#3a1830; --nc:#6ea0ff;
       --off:#43d08a; --off-bg:#123a2a; --in:#ff7a4d; --in-bg:#3e2018;
-      --wknd:#9aa0ff; --wknd-bg:#23264f; --warn:#e4b45a; --warn-bg:#362c17;
-      --pend:#ff7fc0; --pend-bg:#3a1e38;
+      --wknd:#46d6ce; --wknd-bg:#0f3a38; --warn:#e4c94f; --warn-bg:#332e10;
+      --pend:#6ea0ff; --pend-bg:#16264c;
     }
   }
   * { box-sizing:border-box; }
@@ -83,7 +83,7 @@
     font-family:"Oswald","Arial Narrow",-apple-system,BlinkMacSystemFont,sans-serif;
   }
   header h1 { text-transform:uppercase; font-weight:700; letter-spacing:.5px; font-size:42px;
-    background:linear-gradient(92deg,var(--brand) 0%, #7a2bd6 55%, #1a03b5 100%);
+    background:linear-gradient(92deg,#fb2461 0%, #f8450a 100%);
     -webkit-background-clip:text; background-clip:text; color:transparent; }
   header .sub { font-size:15.5px; }
   h2 { text-transform:uppercase; font-weight:700; letter-spacing:.4px; font-size:20px; }
@@ -98,7 +98,7 @@
   .hub { background:var(--brand-soft); color:var(--brand); }
   body { background:
      radial-gradient(1100px 480px at 100% -8%, rgba(251,36,97,.07), transparent 60%),
-     radial-gradient(900px 460px at -5% 8%, rgba(26,3,181,.05), transparent 55%),
+     radial-gradient(900px 460px at -5% 8%, rgba(37,228,222,.06), transparent 55%),
      var(--bg); background-attachment:fixed; }
 </style>
 </head>
@@ -203,15 +203,18 @@
   let stateFilter="ALL";
   function renderOrder(){
     const view=document.getElementById("view");
-    const districts=allDistricts();
-    const pop=DATA.regions.filter(r=>r.status==="populated").length;
+    const pops=DATA.regions.filter(r=>r.status==="populated");
     view.innerHTML =
-      checkerCard("Is this date clear? — Entire Order",
-        "Checks your date across every gathered district in all BBYO regions. ("+districts.length+" districts from "+pop+" region"+(pop>1?"s":"")+" loaded so far.)")
-      + '<section class="card"><h2>Regions</h2><p class="h2sub">Pick a region to see its schools. ✓ = dates loaded · ⏳ = being gathered.</p><div class="rgrid" id="rgrid"></div></section>';
-    const host=view.querySelector(".card");
-    host.querySelector("input").addEventListener("input",()=>renderChecker(host,districts,true));
-    renderChecker(host,districts,true);
+      '<section class="card"><h2>Is this date clear? — Entire Order</h2>'+
+      '<p class="h2sub">Which BBYO regions are clear (no school) on your date. '+pops.length+' of '+DATA.regions.length+' regions have dates loaded so far.</p>'+
+      '<input type="date" min="2026-07-01" max="2027-08-31" value="'+DEFAULT_DATE+'">'+
+      '<div class="summary" id="ordersum"></div><div class="result-grid" id="orderres"></div>'+
+      '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> Region clear</span>'+
+      '<span><span class="dot" style="background:var(--in)"></span> Some schools in session</span></div></section>'+
+      '<section class="card"><h2>Regions</h2><p class="h2sub">Pick a region to see its schools by district. ✓ = dates loaded · ⏳ = being gathered.</p><div class="rgrid" id="rgrid"></div></section>';
+    const input=view.querySelector("input");
+    input.addEventListener("input",()=>renderOrderResults(input.value,pops));
+    renderOrderResults(input.value,pops);
     const grid=document.getElementById("rgrid");
     DATA.regions.forEach(r=>{
       const b=document.createElement("button"); b.className="rcard";
@@ -222,6 +225,30 @@
       b.addEventListener("click",()=>{ document.getElementById("region").value=r.id; go(r.id); });
       grid.appendChild(b);
     });
+  }
+
+  function renderOrderResults(val,pops){
+    const sum=document.getElementById("ordersum");
+    const res=document.getElementById("orderres");
+    res.innerHTML="";
+    if(!pops.length){ sum.textContent="No regions loaded yet."; return; }
+    if(!val){ sum.textContent="Pick a date above."; return; }
+    const dt=toDate(val);
+    const clear=[];
+    pops.forEach(r=>{
+      let inn=0; r.districts.forEach(d=>{ if(statusOn(d,dt).kind==="in") inn++; });
+      const el=document.createElement("div"); el.className="result";
+      if(inn===0){ clear.push(r.name);
+        el.innerHTML='<span class="nm">'+r.name+'</span><span class="st off">Clear</span>'; }
+      else {
+        el.innerHTML='<span class="nm">'+r.name+'</span><span class="st in">'+inn+' school'+(inn>1?"s":"")+' in session</span>'; }
+      res.appendChild(el);
+    });
+    const pending=DATA.regions.length-pops.length;
+    const head = clear.length ? "🟢 <b>Clear regions:</b> "+clear.join(", ")
+                              : "🔴 No loaded region is fully clear on this date.";
+    sum.innerHTML = head + "<br><b>"+clear.length+"</b> of "+pops.length+" loaded regions clear"+
+      (pending?" · "+pending+" more regions still being gathered":"");
   }
 
   function renderRegion(r){
