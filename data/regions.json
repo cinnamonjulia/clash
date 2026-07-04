@@ -1,5 +1,4 @@
-// AUTO-GENERATED from ../data/regions.json — do not edit by hand.
-window.CALENDER_DATA = {
+{
   "order": "BBYO",
   "schoolYear": "2026-2027",
   "lastGathered": "2026-07-03",
@@ -766,4 +765,4 @@ window.CALENDER_DATA = {
       "districts": []
     }
   ]
-};
+}

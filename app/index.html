@@ -3,262 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CalendER — BBYO Eastern Region School Dates</title>
+<title>CalendER — BBYO School Dates</title>
 <style>
   :root {
-    --bg: #f5f6fb;
-    --card: #ffffff;
-    --ink: #1e2140;
-    --ink-soft: #5f6488;
-    --line: #e6e7f2;
-    --brand: #4f5bd5;
-    --brand-soft: #eceeffe0;
-    --nc: #3f7fd6;
-    --sc: #d67a3f;
-    --va: #3faa8e;
-    --off: #2f9e6f;
-    --off-bg: #e7f6ee;
-    --in: #c05a6b;
-    --in-bg: #fbecef;
-    --wknd: #7a7fb0;
-    --wknd-bg: #eeeffa;
-    --warn: #b8862a;
-    --warn-bg: #fcf3e0;
+    --bg:#f5f6fb; --card:#fff; --ink:#1e2140; --ink-soft:#5f6488; --line:#e6e7f2;
+    --brand:#4f5bd5; --brand-soft:#eceeff;
+    --nc:#3f7fd6; --off:#2f9e6f; --off-bg:#e7f6ee; --in:#c05a6b; --in-bg:#fbecef;
+    --wknd:#7a7fb0; --wknd-bg:#eeeffa; --warn:#b8862a; --warn-bg:#fcf3e0; --pend:#8a6fc0; --pend-bg:#f0ebfa;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #14162a; --card: #1f2140; --ink: #eef0ff; --ink-soft: #a4a8d0;
-      --line: #2c2f52; --brand: #8b95ff; --brand-soft: #24284d;
-      --off-bg: #163a2b; --in-bg: #3a1f27; --wknd-bg: #23264a; --warn-bg: #362c17;
+      --bg:#14162a; --card:#1f2140; --ink:#eef0ff; --ink-soft:#a4a8d0; --line:#2c2f52;
+      --brand:#8b95ff; --brand-soft:#24284d; --off-bg:#163a2b; --in-bg:#3a1f27;
+      --wknd-bg:#23264a; --warn-bg:#362c17; --pend-bg:#2a2440;
     }
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, sans-serif;
-    line-height: 1.45; -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
-  header h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -0.02em; }
-  header .sub { color: var(--ink-soft); font-size: 15px; margin: 0 0 4px; }
-  header .meta { color: var(--ink-soft); font-size: 12.5px; }
-  .card {
-    background: var(--card); border-radius: 16px; border: 1px solid var(--line);
-    box-shadow: 0 2px 14px rgba(40,42,90,0.05); padding: 20px; margin-top: 20px;
-  }
-  h2 { font-size: 18px; margin: 0 0 12px; letter-spacing: -0.01em; }
-  /* Checker */
-  .checker-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  input[type=date] {
-    font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 10px;
-    border: 1px solid var(--line); background: var(--bg); color: var(--ink);
-  }
-  .summary { margin-top: 16px; font-size: 15px; color: var(--ink-soft); }
-  .summary b { color: var(--ink); }
-  .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-top: 14px; }
-  .result {
-    display: flex; justify-content: space-between; align-items: center; gap: 8px;
-    padding: 9px 12px; border-radius: 10px; font-size: 13.5px; background: var(--bg);
-  }
-  .result .nm { font-weight: 600; }
-  .result .st { font-size: 12px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
-  .st.off { color: var(--off); background: var(--off-bg); }
-  .st.in { color: var(--in); background: var(--in-bg); }
-  .st.wknd { color: var(--wknd); background: var(--wknd-bg); }
-  .st.unknown { color: var(--ink-soft); background: var(--line); }
-  /* Filters */
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 0; }
-  .filters button {
-    font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
-    padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line);
-    background: var(--card); color: var(--ink-soft);
-  }
-  .filters button.active { background: var(--brand); color: #fff; border-color: var(--brand); }
-  /* District cards */
-  .state-group { margin-top: 26px; }
-  .state-group h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin: 0 0 10px; }
-  .dgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-  .district { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-  .district .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-  .district .name { font-weight: 700; font-size: 15.5px; }
-  .district .city { color: var(--ink-soft); font-size: 12.5px; margin-top: 1px; }
-  .chip { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; color: #fff; white-space: nowrap; }
-  .chip.NC { background: var(--nc); } .chip.SC { background: var(--sc); } .chip.VA { background: var(--va); }
-  .dates { margin-top: 12px; display: grid; grid-template-columns: auto 1fr; gap: 5px 12px; font-size: 13px; }
-  .dates dt { color: var(--ink-soft); }
-  .dates dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
-  .tbd { color: var(--ink-soft); font-style: italic; }
-  .warnflag { margin-top: 12px; font-size: 12px; color: var(--warn); background: var(--warn-bg); padding: 8px 10px; border-radius: 9px; }
-  footer { margin-top: 34px; color: var(--ink-soft); font-size: 12.5px; text-align: center; }
-  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--ink-soft); margin-top: 12px; }
-  .legend span { display: inline-flex; align-items: center; gap: 5px; }
-  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro","Segoe UI",Roboto,sans-serif; line-height:1.45; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1000px; margin:0 auto; padding:26px 20px 80px; }
+  header h1 { font-size:30px; margin:0 0 4px; letter-spacing:-0.02em; }
+  header .sub { color:var(--ink-soft); font-size:15px; margin:0; }
+  /* region picker */
+  .picker { margin:20px 0 4px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .picker label { font-size:13px; font-weight:600; color:var(--ink-soft); }
+  select#region { font:inherit; font-size:16px; font-weight:600; padding:11px 14px; border-radius:12px;
+    border:1px solid var(--line); background:var(--card); color:var(--ink); min-width:280px; cursor:pointer; }
+  .card { background:var(--card); border-radius:16px; border:1px solid var(--line);
+    box-shadow:0 2px 14px rgba(40,42,90,0.05); padding:20px; margin-top:18px; }
+  h2 { font-size:19px; margin:0 0 4px; letter-spacing:-0.01em; }
+  .h2sub { color:var(--ink-soft); font-size:13px; margin:0 0 14px; }
+  input[type=date] { font:inherit; font-size:16px; padding:10px 12px; border-radius:10px;
+    border:1px solid var(--line); background:var(--bg); color:var(--ink); }
+  .summary { margin-top:16px; font-size:15px; color:var(--ink-soft); } .summary b { color:var(--ink); }
+  .result-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; margin-top:14px; }
+  .result { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:9px 12px;
+    border-radius:10px; font-size:13.5px; background:var(--bg); }
+  .result .nm { font-weight:600; } .result .rg { font-size:11px; color:var(--ink-soft); }
+  .st { font-size:12px; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+  .st.off{color:var(--off);background:var(--off-bg);} .st.in{color:var(--in);background:var(--in-bg);}
+  .st.wknd{color:var(--wknd);background:var(--wknd-bg);} .st.unknown{color:var(--ink-soft);background:var(--line);}
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:12px; }
+  .legend span { display:inline-flex; align-items:center; gap:5px; } .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  /* region overview grid */
+  .rgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:12px; margin-top:16px; }
+  .rcard { text-align:left; background:var(--card); border:1px solid var(--line); border-radius:13px; padding:14px; cursor:pointer; font:inherit; color:var(--ink); }
+  .rcard:hover { border-color:var(--brand); }
+  .rcard .rn { font-weight:700; font-size:14px; } .rcard .rs { color:var(--ink-soft); font-size:12px; margin-top:2px; }
+  .badge { display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; margin-top:9px; }
+  .badge.ok { color:var(--off); background:var(--off-bg); } .badge.pend { color:var(--pend); background:var(--pend-bg); }
+  /* district cards */
+  .filters { display:flex; gap:8px; flex-wrap:wrap; margin:18px 0 0; }
+  .filters button { font:inherit; font-size:13.5px; font-weight:600; cursor:pointer; padding:7px 14px;
+    border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--ink-soft); }
+  .filters button.active { background:var(--brand); color:#fff; border-color:var(--brand); }
+  .state-group { margin-top:22px; } .state-group h3 { font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin:0 0 10px; }
+  .dgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+  .district { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .district .top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+  .district .name { font-weight:700; font-size:15.5px; } .district .city { color:var(--ink-soft); font-size:12.5px; margin-top:1px; }
+  .chip { font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; color:#fff; background:var(--nc); white-space:nowrap; }
+  .dates { margin-top:12px; display:grid; grid-template-columns:auto 1fr; gap:5px 12px; font-size:13px; }
+  .dates dt { color:var(--ink-soft); } .dates dd { margin:0; text-align:right; font-variant-numeric:tabular-nums; }
+  .tbd { color:var(--ink-soft); font-style:italic; }
+  .warnflag { margin-top:12px; font-size:12px; color:var(--warn); background:var(--warn-bg); padding:8px 10px; border-radius:9px; }
+  .pendbox { text-align:center; padding:30px 20px; color:var(--ink-soft); }
+  .pendbox .big { font-size:38px; } .pendbox h3 { color:var(--ink); margin:10px 0 6px; }
+  .hublist { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px; }
+  .hub { font-size:12.5px; padding:5px 11px; border-radius:999px; background:var(--brand-soft); color:var(--brand); font-weight:600; }
+  footer { margin-top:34px; color:var(--ink-soft); font-size:12.5px; text-align:center; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>CalendER</h1>
-    <p class="sub">BBYO Eastern Region school dates — plan events around school.</p>
-    <p class="meta" id="meta"></p>
+    <p class="sub">BBYO school dates — plan events around school, across the Order.</p>
   </header>
 
-  <!-- Date checker -->
-  <section class="card">
-    <h2>Is this date clear?</h2>
-    <div class="checker-row">
-      <input type="date" id="datePick" min="2026-07-01" max="2027-08-31">
-      <span class="meta">Pick a date to see where school is in session vs. off.</span>
-    </div>
-    <div class="summary" id="summary"></div>
-    <div class="result-grid" id="results"></div>
-    <div class="legend">
-      <span><span class="dot" style="background:var(--off)"></span> School off (free)</span>
-      <span><span class="dot" style="background:var(--wknd)"></span> Weekend</span>
-      <span><span class="dot" style="background:var(--in)"></span> School in session</span>
-    </div>
-  </section>
+  <div class="picker">
+    <label for="region">View:</label>
+    <select id="region"></select>
+  </div>
 
-  <!-- District list -->
-  <section style="margin-top:26px;">
-    <div class="filters" id="filters">
-      <button data-st="ALL" class="active">All</button>
-      <button data-st="NC">North Carolina</button>
-      <button data-st="SC">South Carolina</button>
-      <button data-st="VA">Virginia</button>
-    </div>
-    <div id="districts"></div>
-  </section>
+  <div id="view"></div>
 
-  <footer>
-    Data gathered July 2026 · ⚠️ = needs verifying against the district's official calendar ·
-    Sources stored in <code>data/districts.json</code>
-  </footer>
+  <footer id="foot"></footer>
 </div>
 
 <script src="data.js"></script>
 <script>
   const DATA = window.CALENDER_DATA;
-  const STATE_NAMES = { NC: "North Carolina", SC: "South Carolina", VA: "Virginia" };
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const STATE_NAMES = {AL:"Alabama",AZ:"Arizona",CA:"California",CO:"Colorado",CT:"Connecticut",DC:"Washington DC",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",IA:"Iowa",IL:"Illinois",IN:"Indiana",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",MA:"Massachusetts",MD:"Maryland",ME:"Maine",MI:"Michigan",MN:"Minnesota",MO:"Missouri",MS:"Mississippi",NC:"North Carolina",NE:"Nebraska",NH:"New Hampshire",NJ:"New Jersey",NY:"New York",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",TN:"Tennessee",TX:"Texas",VA:"Virginia",WA:"Washington",WI:"Wisconsin",WV:"West Virginia"};
+  const DEFAULT_DATE = "2026-12-25";
 
-  // ---- helpers ----
-  function toDate(s) { if (!s) return null; const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); }
-  function fmt(s) { const dt = toDate(s); if (!dt) return null; return MONTHS[dt.getMonth()] + " " + dt.getDate(); }
-  function fmtRange(r) {
-    if (!r) return null;
-    const [a,b] = r.split(" to ");
-    const da = toDate(a), db = toDate(b);
-    if (da.getMonth() === db.getMonth()) return MONTHS[da.getMonth()] + " " + da.getDate() + "–" + db.getDate();
-    return MONTHS[da.getMonth()] + " " + da.getDate() + " – " + MONTHS[db.getMonth()] + " " + db.getDate();
-  }
-  function inRange(dt, r) {
-    if (!r) return false;
-    const [a,b] = r.split(" to ");
-    return dt >= toDate(a) && dt <= toDate(b);
-  }
-
-  // status of a district on a given Date -> {kind, label}
-  function statusOn(d, dt) {
-    if (!d.firstDay || !d.lastDay) return { kind: "unknown", label: "Dates pending" };
-    if (dt < toDate(d.firstDay)) return { kind: "off", label: "Before school starts" };
-    if (dt > toDate(d.lastDay))  return { kind: "off", label: "Summer break" };
-    if (inRange(dt, d.thanksgivingBreak)) return { kind: "off", label: "Thanksgiving break" };
-    if (inRange(dt, d.winterBreak))       return { kind: "off", label: "Winter break" };
-    if (inRange(dt, d.springBreak))       return { kind: "off", label: "Spring break" };
-    if (d.mlkDay && dt.getTime() === toDate(d.mlkDay).getTime()) return { kind: "off", label: "MLK Day" };
-    const dow = dt.getDay();
-    if (dow === 0 || dow === 6) return { kind: "wknd", label: "Weekend" };
-    return { kind: "in", label: "School in session" };
+  // ---- date helpers ----
+  const toDate = s => { if(!s) return null; const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); };
+  const fmt = s => { const dt=toDate(s); return dt? MONTHS[dt.getMonth()]+" "+dt.getDate() : null; };
+  function fmtRange(r){ if(!r) return null; const [a,b]=r.split(" to "); const da=toDate(a),db=toDate(b);
+    return da.getMonth()===db.getMonth() ? MONTHS[da.getMonth()]+" "+da.getDate()+"–"+db.getDate()
+      : MONTHS[da.getMonth()]+" "+da.getDate()+" – "+MONTHS[db.getMonth()]+" "+db.getDate(); }
+  function inRange(dt,r){ if(!r) return false; const [a,b]=r.split(" to "); return dt>=toDate(a)&&dt<=toDate(b); }
+  function statusOn(d,dt){
+    if(!d.firstDay||!d.lastDay) return {kind:"unknown",label:"Dates pending"};
+    if(dt<toDate(d.firstDay)) return {kind:"off",label:"Before school starts"};
+    if(dt>toDate(d.lastDay)) return {kind:"off",label:"Summer break"};
+    if(inRange(dt,d.thanksgivingBreak)) return {kind:"off",label:"Thanksgiving break"};
+    if(inRange(dt,d.winterBreak)) return {kind:"off",label:"Winter break"};
+    if(inRange(dt,d.springBreak)) return {kind:"off",label:"Spring break"};
+    if(d.mlkDay && dt.getTime()===toDate(d.mlkDay).getTime()) return {kind:"off",label:"MLK Day"};
+    const dow=dt.getDay(); if(dow===0||dow===6) return {kind:"wknd",label:"Weekend"};
+    return {kind:"in",label:"School in session"};
   }
 
-  // ---- render checker ----
-  function runChecker() {
-    const val = document.getElementById("datePick").value;
-    const summary = document.getElementById("summary");
-    const results = document.getElementById("results");
-    results.innerHTML = "";
-    if (!val) { summary.innerHTML = "Pick a date above."; return; }
-    const dt = toDate(val);
-    let offCount = 0, inCount = 0, wkndCount = 0, unknown = 0;
-    DATA.districts.forEach(d => {
-      const s = statusOn(d, dt);
-      if (s.kind === "off") offCount++;
-      else if (s.kind === "in") inCount++;
-      else if (s.kind === "wknd") wkndCount++;
-      else unknown++;
-      const el = document.createElement("div");
-      el.className = "result";
-      el.innerHTML = '<span class="nm">' + d.chapterCity + '</span>' +
-        '<span class="st ' + s.kind + '">' + s.label + '</span>';
+  // collect all districts from populated regions, tagged with region name
+  function allDistricts(){
+    const out=[];
+    DATA.regions.filter(r=>r.status==="populated").forEach(r=>
+      r.districts.forEach(d=> out.push(Object.assign({_region:r.name},d))));
+    return out;
+  }
+
+  // ---- checker (shared) ----
+  function renderChecker(host, districts, showRegion){
+    const val = host.querySelector("input[type=date]").value;
+    const summary = host.querySelector(".summary");
+    const results = host.querySelector(".result-grid");
+    results.innerHTML="";
+    if(!val){ summary.textContent="Pick a date above."; return; }
+    const dt=toDate(val);
+    let off=0,inn=0,wk=0,unk=0;
+    districts.forEach(d=>{
+      const s=statusOn(d,dt);
+      if(s.kind==="off")off++; else if(s.kind==="in")inn++; else if(s.kind==="wknd")wk++; else unk++;
+      const el=document.createElement("div"); el.className="result";
+      el.innerHTML='<span><span class="nm">'+d.chapterCity+'</span>'+
+        (showRegion?'<br><span class="rg">'+d._region+'</span>':'')+'</span>'+
+        '<span class="st '+s.kind+'">'+s.label+'</span>';
       results.appendChild(el);
     });
-    const total = DATA.districts.length;
-    const free = offCount + wkndCount;
-    let verdict;
-    if (inCount === 0) verdict = "🟢 <b>Great window</b> — no district has a normal school day.";
-    else if (inCount <= 3) verdict = "🟡 <b>Mostly clear</b> — a few districts are in session.";
-    else verdict = "🔴 <b>Busy school day</b> for most districts.";
-    summary.innerHTML = verdict + "<br>" +
-      "<b>" + free + "</b> of " + total + " districts are off (" + offCount + " on break/holiday, " +
-      wkndCount + " weekend) · <b>" + inCount + "</b> in session" +
-      (unknown ? " · " + unknown + " pending" : "");
+    const total=districts.length, free=off+wk;
+    let verdict = inn===0 ? "🟢 <b>Great window</b> — no district has a normal school day."
+      : inn<=Math.max(2,Math.round(total*0.2)) ? "🟡 <b>Mostly clear</b> — a few districts are in session."
+      : "🔴 <b>Busy school day</b> for most districts.";
+    summary.innerHTML = verdict+"<br><b>"+free+"</b> of "+total+" districts off ("+off+" break/holiday, "+wk+" weekend) · <b>"+inn+"</b> in session"+(unk?" · "+unk+" pending":"");
+  }
+  function checkerCard(title, sub){
+    return '<section class="card"><h2>'+title+'</h2><p class="h2sub">'+sub+'</p>'+
+      '<input type="date" min="2026-07-01" max="2027-08-31" value="'+DEFAULT_DATE+'">'+
+      '<div class="summary"></div><div class="result-grid"></div>'+
+      '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> School off (free)</span>'+
+      '<span><span class="dot" style="background:var(--wknd)"></span> Weekend</span>'+
+      '<span><span class="dot" style="background:var(--in)"></span> In session</span></div></section>';
   }
 
-  // ---- render district cards ----
-  let activeState = "ALL";
-  function renderDistricts() {
-    const host = document.getElementById("districts");
-    host.innerHTML = "";
-    ["NC","SC","VA"].forEach(st => {
-      if (activeState !== "ALL" && activeState !== st) return;
-      const list = DATA.districts.filter(d => d.state === st);
-      if (!list.length) return;
-      const group = document.createElement("div");
-      group.className = "state-group";
-      group.innerHTML = "<h3>" + STATE_NAMES[st] + "</h3>";
-      const grid = document.createElement("div");
-      grid.className = "dgrid";
-      list.forEach(d => grid.appendChild(districtCard(d)));
-      group.appendChild(grid);
-      host.appendChild(group);
+  // ---- district card ----
+  function row(l,v){ return "<dt>"+l+"</dt><dd>"+(v?v:'<span class="tbd">TBD</span>')+"</dd>"; }
+  function districtCard(d){
+    const el=document.createElement("div"); el.className="district";
+    let h='<div class="top"><div><div class="name">'+(d.verify?"⚠️ ":"")+d.name+'</div>'+
+      '<div class="city">'+d.chapterCity+'</div></div><span class="chip">'+d.state+'</span></div>';
+    h+='<dl class="dates">'+row("First day",fmt(d.firstDay))+row("Last day",fmt(d.lastDay))+
+      row("Thanksgiving",fmtRange(d.thanksgivingBreak))+row("Winter break",fmtRange(d.winterBreak))+
+      row("Spring break",fmtRange(d.springBreak))+row("Graduation",fmt(d.graduation))+'</dl>';
+    if(d.verify&&d.verifyNote) h+='<div class="warnflag">⚠️ '+d.verifyNote+'</div>';
+    el.innerHTML=h; return el;
+  }
+
+  // ---- views ----
+  let stateFilter="ALL";
+  function renderOrder(){
+    const view=document.getElementById("view");
+    const districts=allDistricts();
+    const pop=DATA.regions.filter(r=>r.status==="populated").length;
+    view.innerHTML =
+      checkerCard("Is this date clear? — Entire Order",
+        "Checks your date across every gathered district in all BBYO regions. ("+districts.length+" districts from "+pop+" region"+(pop>1?"s":"")+" loaded so far.)")
+      + '<section class="card"><h2>Regions</h2><p class="h2sub">Pick a region to see its schools. ✓ = dates loaded · ⏳ = being gathered.</p><div class="rgrid" id="rgrid"></div></section>';
+    const host=view.querySelector(".card");
+    host.querySelector("input").addEventListener("input",()=>renderChecker(host,districts,true));
+    renderChecker(host,districts,true);
+    const grid=document.getElementById("rgrid");
+    DATA.regions.forEach(r=>{
+      const b=document.createElement("button"); b.className="rcard";
+      const ok=r.status==="populated";
+      b.innerHTML='<div class="rn">'+r.name+'</div><div class="rs">'+
+        (r.states||[]).map(s=>s).join(" · ")+'</div>'+
+        '<span class="badge '+(ok?"ok":"pend")+'">'+(ok?"✓ "+r.districts.length+" districts":"⏳ pending")+'</span>';
+      b.addEventListener("click",()=>{ document.getElementById("region").value=r.id; go(r.id); });
+      grid.appendChild(b);
     });
   }
-  function row(label, val) {
-    return "<dt>" + label + "</dt><dd>" + (val ? val : '<span class="tbd">TBD</span>') + "</dd>";
+
+  function renderRegion(r){
+    const view=document.getElementById("view");
+    const statesLine=(r.states||[]).map(s=>STATE_NAMES[s]||s).join(" · ");
+    if(r.status!=="populated"){
+      view.innerHTML='<section class="card"><div class="pendbox"><div class="big">⏳</div>'+
+        '<h3>'+r.name+'</h3><p>'+(statesLine||"")+'</p>'+
+        '<p>School dates for this region are still being gathered.<br>Known chapter areas:</p>'+
+        '<div class="hublist">'+(r.hubs||[]).map(h=>'<span class="hub">'+h+'</span>').join("")+'</div></div></section>';
+      return;
+    }
+    stateFilter="ALL";
+    view.innerHTML = checkerCard("Is this date clear? — "+r.name,
+      "Checks your date across "+r.name+"'s "+r.districts.length+" districts ("+statesLine+").")
+      + '<div class="filters" id="filters"></div><div id="districts"></div>';
+    const host=view.querySelector(".card");
+    host.querySelector("input").addEventListener("input",()=>renderChecker(host,r.districts,false));
+    renderChecker(host,r.districts,false);
+    // filters
+    const states=[...new Set(r.districts.map(d=>d.state))];
+    const filters=document.getElementById("filters");
+    const mk=(st,lbl)=>{ const b=document.createElement("button"); b.textContent=lbl; b.dataset.st=st;
+      if(st===stateFilter)b.classList.add("active");
+      b.addEventListener("click",()=>{ stateFilter=st; renderCards(r); [...filters.children].forEach(c=>c.classList.toggle("active",c.dataset.st===st)); });
+      return b; };
+    filters.appendChild(mk("ALL","All"));
+    states.forEach(s=>filters.appendChild(mk(s,STATE_NAMES[s]||s)));
+    renderCards(r);
   }
-  function districtCard(d) {
-    const el = document.createElement("div");
-    el.className = "district";
-    let html = '<div class="top"><div><div class="name">' +
-      (d.verify ? "⚠️ " : "") + d.name + '</div><div class="city">' + d.chapterCity + '</div></div>' +
-      '<span class="chip ' + d.state + '">' + d.state + '</span></div>';
-    html += '<dl class="dates">' +
-      row("First day", fmt(d.firstDay)) +
-      row("Last day", fmt(d.lastDay)) +
-      row("Thanksgiving", fmtRange(d.thanksgivingBreak)) +
-      row("Winter break", fmtRange(d.winterBreak)) +
-      row("Spring break", fmtRange(d.springBreak)) +
-      row("Graduation", fmt(d.graduation)) +
-      '</dl>';
-    if (d.verify && d.verifyNote) html += '<div class="warnflag">⚠️ ' + d.verifyNote + '</div>';
-    el.innerHTML = html;
-    return el;
+  function renderCards(r){
+    const host=document.getElementById("districts"); host.innerHTML="";
+    const states=[...new Set(r.districts.map(d=>d.state))];
+    states.forEach(st=>{
+      if(stateFilter!=="ALL"&&stateFilter!==st) return;
+      const list=r.districts.filter(d=>d.state===st); if(!list.length)return;
+      const g=document.createElement("div"); g.className="state-group";
+      g.innerHTML="<h3>"+(STATE_NAMES[st]||st)+"</h3>";
+      const grid=document.createElement("div"); grid.className="dgrid";
+      list.forEach(d=>grid.appendChild(districtCard(d))); g.appendChild(grid); host.appendChild(g);
+    });
   }
 
-  // ---- wire up ----
-  document.getElementById("meta").textContent =
-    DATA.districts.length + " districts · " + DATA.schoolYear + " school year · gathered " + DATA.lastGathered;
-  document.getElementById("datePick").value = "2026-12-25";
-  document.getElementById("datePick").addEventListener("input", runChecker);
-  document.getElementById("filters").addEventListener("click", e => {
-    if (e.target.tagName !== "BUTTON") return;
-    activeState = e.target.dataset.st;
-    document.querySelectorAll("#filters button").forEach(b => b.classList.toggle("active", b === e.target));
-    renderDistricts();
-  });
-  runChecker();
-  renderDistricts();
+  // ---- routing ----
+  function go(id){
+    if(id==="order") renderOrder();
+    else renderRegion(DATA.regions.find(r=>r.id===id));
+    window.scrollTo(0,0);
+  }
+  // build dropdown
+  const sel=document.getElementById("region");
+  sel.innerHTML='<option value="order">🇺🇸 Entire Order (all BBYO)</option>'+
+    DATA.regions.map(r=>'<option value="'+r.id+'">'+r.name+(r.status==="populated"?" ✓":"")+'</option>').join("");
+  sel.addEventListener("change",e=>go(e.target.value));
+  document.getElementById("foot").innerHTML =
+    DATA.regions.length+" regions · "+DATA.schoolYear+" · ⚠️ = needs verifying · data gathered "+DATA.lastGathered;
+  go("order");
 </script>
 </body>
 </html>
