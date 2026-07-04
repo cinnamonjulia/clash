@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CalendER — BBYO School Dates</title>
+<title>Clash — BBYO School Dates</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
@@ -113,8 +113,8 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>CalendER</h1>
-    <p class="sub">BBYO school dates — plan events around school, across the Order.</p>
+    <h1>Clash</h1>
+    <p class="sub">Spot the clash before you book it — BBYO school dates across the Order.</p>
   </header>
 
   <div class="picker">
@@ -161,6 +161,7 @@
     if(bl) return {kind:"risky",label:bl};
     if(!d.firstDay||!d.lastDay) return {kind:"unknown",label:"Dates pending"};
     const iso=isoOf(dt);
+    if(d.bigEvents){ const e=d.bigEvents.find(e=>e.date===iso); if(e) return {kind:"risky",label:e.label+" — teens busy"}; }
     if(d.teacherWorkdays && d.teacherWorkdays.indexOf(iso)>=0) return {kind:"flex",label:"Teacher workday — teens off"};
     if(d.halfDays && d.halfDays.indexOf(iso)>=0) return {kind:"flex",label:"Half day — out early"};
     const dow=dt.getDay();
@@ -229,6 +230,10 @@
       row("Thanksgiving",fmtRange(d.thanksgivingBreak))+row("Winter break",fmtRange(d.winterBreak))+
       (d.midwinterBreak?row("Mid-winter break",fmtRange(d.midwinterBreak)):"")+
       row("Spring break",fmtRange(d.springBreak))+row("Graduation",fmt(d.graduation))+'</dl>';
+    if(d.bigEvents&&d.bigEvents.length){
+      h+='<div class="warnflag" style="color:var(--in);background:var(--in-bg);">🎉 '+
+        d.bigEvents.map(e=>e.label+" "+fmt(e.date)).join(" · ")+'</div>';
+    }
     if(d.verify&&d.verifyNote) h+='<div class="warnflag">⚠️ '+d.verifyNote+'</div>';
     el.innerHTML=h; return el;
   }
@@ -252,7 +257,7 @@
     input.addEventListener("input",()=>renderOrderResults(input.value,pops));
     renderOrderResults(input.value,pops);
     const grid=document.getElementById("rgrid");
-    DATA.regions.forEach(r=>{
+    DATA.regions.slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(r=>{
       const b=document.createElement("button"); b.className="rcard";
       const ok=r.status==="populated";
       b.innerHTML='<div class="rn">'+r.name+'</div><div class="rs">'+
@@ -340,8 +345,9 @@
   }
   // build dropdown
   const sel=document.getElementById("region");
+  const AZ=DATA.regions.slice().sort((a,b)=>a.name.localeCompare(b.name));
   sel.innerHTML='<option value="order">🇺🇸 Entire Order (all BBYO)</option>'+
-    DATA.regions.map(r=>'<option value="'+r.id+'">'+r.name+(r.status==="populated"?" ✓":"")+'</option>').join("");
+    AZ.map(r=>'<option value="'+r.id+'">'+r.name+(r.status==="populated"?" ✓":"")+'</option>').join("");
   sel.addEventListener("change",e=>go(e.target.value));
   document.getElementById("foot").innerHTML =
     DATA.regions.length+" regions · "+DATA.schoolYear+" · ⚠️ = needs verifying · data gathered "+DATA.lastGathered;

@@ -1,4 +1,4 @@
-# CalendER
+# Clash (formerly CalendER)
 
 A planning tool for **BBYO Eastern Region** (NC / SC / VA): key school dates for the
 districts where ER has chapters, so events don't collide with school schedules.
