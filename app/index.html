@@ -142,19 +142,32 @@
     return da.getMonth()===db.getMonth() ? MONTHS[da.getMonth()]+" "+da.getDate()+"–"+db.getDate()
       : MONTHS[da.getMonth()]+" "+da.getDate()+" – "+MONTHS[db.getMonth()]+" "+db.getDate(); }
   function inRange(dt,r){ if(!r) return false; const [a,b]=r.split(" to "); return dt>=toDate(a)&&dt<=toDate(b); }
+  // Is this date a multi-day break / holiday closure (not a weekend)? Returns a label or null.
+  function breakLabel(d,dt){
+    if(dt<toDate(d.firstDay)||dt>toDate(d.lastDay)) return "Summer break";
+    if(inRange(dt,d.thanksgivingBreak)) return "Thanksgiving break";
+    if(inRange(dt,d.winterBreak)) return "Winter break";
+    if(inRange(dt,d.springBreak)) return "Spring break";
+    if(d.mlkDay && dt.getTime()===toDate(d.mlkDay).getTime()) return "Holiday (may travel)";
+    return null;
+  }
   // Programming-quality of a date: great = teens home & free (weekend),
-  // school = weekday in class (evenings ok), risky = break/holiday (may be traveling).
+  // school = weekday in class (evenings ok), risky = break/holiday or a break-adjacent weekend (may travel).
   function statusOn(d,dt){
     if(!d.firstDay||!d.lastDay) return {kind:"unknown",label:"Dates pending"};
-    if(dt<toDate(d.firstDay)||dt>toDate(d.lastDay)) return {kind:"risky",label:"Summer break"};
-    if(inRange(dt,d.thanksgivingBreak)) return {kind:"risky",label:"Thanksgiving break"};
-    if(inRange(dt,d.winterBreak)) return {kind:"risky",label:"Winter break"};
-    if(inRange(dt,d.springBreak)) return {kind:"risky",label:"Spring break"};
-    if(d.mlkDay && dt.getTime()===toDate(d.mlkDay).getTime()) return {kind:"risky",label:"Holiday (may travel)"};
+    const bl=breakLabel(d,dt);
+    if(bl) return {kind:"risky",label:bl};
     const iso=isoOf(dt);
     if(d.teacherWorkdays && d.teacherWorkdays.indexOf(iso)>=0) return {kind:"flex",label:"Teacher workday — teens off"};
     if(d.halfDays && d.halfDays.indexOf(iso)>=0) return {kind:"flex",label:"Half day — out early"};
-    const dow=dt.getDay(); if(dow===0||dow===6) return {kind:"great",label:"Weekend — free"};
+    const dow=dt.getDay();
+    if(dow===0||dow===6){
+      // A weekend that bookends a break (break sits on the Friday before or Monday after) = travel weekend.
+      const fri=new Date(dt); fri.setDate(dt.getDate()-(dow===0?2:1));
+      const mon=new Date(dt); mon.setDate(dt.getDate()+(dow===0?1:2));
+      if(breakLabel(d,fri)||breakLabel(d,mon)) return {kind:"risky",label:"Break-adjacent weekend — may travel"};
+      return {kind:"great",label:"Weekend — free"};
+    }
     return {kind:"school",label:"School day"};
   }
 
