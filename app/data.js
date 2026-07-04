@@ -279,19 +279,51 @@ window.CALENDER_DATA = {
       "states": [
         "NY"
       ],
-      "status": "pending",
-      "hubs": [
-        "Park Slope",
-        "Cobble Hill",
-        "Forest Hills",
-        "Rego Park",
-        "Bayside",
-        "Little Neck",
-        "Great Neck",
-        "Mill Basin",
-        "East Midwood"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "nycdoe-ny",
+          "name": "New York City Public Schools (DOE)",
+          "chapterCity": "Brooklyn & Queens",
+          "state": "NY",
+          "firstDay": "2026-09-10",
+          "lastDay": "2027-06-28",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-04-22 to 2027-04-30",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.schools.nyc.gov/calendar",
+          "midwinterBreak": "2027-02-15 to 2027-02-19"
+        },
+        {
+          "id": "greatneck-ny",
+          "name": "Great Neck Public Schools",
+          "chapterCity": "Great Neck",
+          "state": "NY",
+          "firstDay": "2026-09-01",
+          "lastDay": "2027-06-25",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-04-21 to 2027-04-30",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.greatneck.k12.ny.us/calendars/2026-27-overview-calendar",
+          "midwinterBreak": "2027-02-15 to 2027-02-19",
+          "otherBreaks": [
+            {
+              "range": "2027-03-25 to 2027-03-29",
+              "label": "Spring Recess I"
+            }
+          ]
+        }
       ],
-      "districts": [],
       "coverage": "Brooklyn, Queens & Great Neck, NY"
     },
     {
@@ -1650,13 +1682,153 @@ window.CALENDER_DATA = {
       "states": [
         "WI"
       ],
-      "status": "pending",
-      "hubs": [
-        "Milwaukee",
-        "Madison",
-        "Appleton"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "nicolet-wi",
+          "name": "Nicolet Union High School District",
+          "chapterCity": "Milwaukee (Fox Point / Glendale)",
+          "state": "WI",
+          "firstDay": "2026-09-01",
+          "lastDay": "2027-06-11",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-23 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-06",
+          "teacherWorkdays": [
+            "2026-09-21",
+            "2026-10-05",
+            "2026-11-30",
+            "2027-01-25",
+            "2027-02-15",
+            "2027-04-29",
+            "2027-04-30"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.nicolet.us/page/schedules"
+        },
+        {
+          "id": "wfb-wi",
+          "name": "Whitefish Bay School District",
+          "chapterCity": "Milwaukee (Whitefish Bay)",
+          "state": "WI",
+          "firstDay": "2026-09-01",
+          "lastDay": "2027-06-11",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-23 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-29",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-10-29",
+            "2026-10-30",
+            "2027-01-25",
+            "2027-03-18",
+            "2027-03-19"
+          ],
+          "halfDays": [
+            "2027-06-11"
+          ],
+          "verify": false,
+          "source": "https://www.wfbschools.com/district/calendars.cfm"
+        },
+        {
+          "id": "shorewood-wi",
+          "name": "Shorewood School District",
+          "chapterCity": "Milwaukee (Shorewood)",
+          "state": "WI",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.shorewood.k12.wi.us/families-students/district-calendar",
+          "verifyNote": "2026-27 calendars are posted on the district page but dates not yet extracted \u2014 starts before Labor Day."
+        },
+        {
+          "id": "mps-wi",
+          "name": "Milwaukee Public Schools",
+          "chapterCity": "Milwaukee",
+          "state": "WI",
+          "firstDay": "2026-09-01",
+          "lastDay": "2027-06-15",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-26 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-10-23",
+            "2026-10-26",
+            "2026-11-24",
+            "2027-01-22",
+            "2027-04-30"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.milwaukeepublicschools.org/about/calendar"
+        },
+        {
+          "id": "mtsd-wi",
+          "name": "Mequon-Thiensville School District (Homestead HS)",
+          "chapterCity": "Milwaukee (Mequon)",
+          "state": "WI",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-23 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-29",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.mtsd.k12.wi.us/district/calendar",
+          "verifyNote": "Winter/spring confirmed via news; first/last day not yet extracted from grade-level PDFs."
+        },
+        {
+          "id": "mmsd-wi",
+          "name": "Madison Metropolitan School District",
+          "chapterCity": "Madison",
+          "state": "WI",
+          "firstDay": "2026-09-02",
+          "lastDay": "2027-06-10",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.madison.k12.wi.us/about/calendar-of-events/2026-2027-school-year-calendar"
+        },
+        {
+          "id": "aasd-wi",
+          "name": "Appleton Area School District",
+          "chapterCity": "Appleton",
+          "state": "WI",
+          "firstDay": "2026-09-01",
+          "lastDay": "2027-06-04",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-29 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.aasd.k12.wi.us/district/district-information/calendars/yearly-calendars",
+          "verifyNote": "TG/winter dates from regional pattern \u2014 confirm against AASD PDF."
+        }
       ],
-      "districts": [],
       "coverage": "Wisconsin (Milwaukee & Madison)"
     },
     {

@@ -144,21 +144,22 @@
   function inRange(dt,r){ if(!r) return false; const [a,b]=r.split(" to "); return dt>=toDate(a)&&dt<=toDate(b); }
   // Is this date a multi-day break / holiday closure (not a weekend)? Returns a label or null.
   function breakLabel(d,dt){
-    if(dt<toDate(d.firstDay)||dt>toDate(d.lastDay)) return "Summer break";
+    if(d.firstDay&&d.lastDay&&(dt<toDate(d.firstDay)||dt>toDate(d.lastDay))) return "Summer break";
     if(inRange(dt,d.fallBreak)) return "Fall break";
     if(inRange(dt,d.midwinterBreak)) return "Mid-winter break";
     if(inRange(dt,d.thanksgivingBreak)) return "Thanksgiving break";
     if(inRange(dt,d.winterBreak)) return "Winter break";
     if(inRange(dt,d.springBreak)) return "Spring break";
     if(d.mlkDay && dt.getTime()===toDate(d.mlkDay).getTime()) return "Holiday (may travel)";
+    if(d.otherBreaks){ for(const b of d.otherBreaks){ if(inRange(dt,b.range)) return b.label; } }
     return null;
   }
   // Programming-quality of a date: great = teens home & free (weekend),
   // school = weekday in class (evenings ok), risky = break/holiday or a break-adjacent weekend (may travel).
   function statusOn(d,dt){
-    if(!d.firstDay||!d.lastDay) return {kind:"unknown",label:"Dates pending"};
     const bl=breakLabel(d,dt);
     if(bl) return {kind:"risky",label:bl};
+    if(!d.firstDay||!d.lastDay) return {kind:"unknown",label:"Dates pending"};
     const iso=isoOf(dt);
     if(d.teacherWorkdays && d.teacherWorkdays.indexOf(iso)>=0) return {kind:"flex",label:"Teacher workday — teens off"};
     if(d.halfDays && d.halfDays.indexOf(iso)>=0) return {kind:"flex",label:"Half day — out early"};
