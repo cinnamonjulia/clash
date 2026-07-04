@@ -656,6 +656,40 @@
           "verify": true,
           "source": "https://www.rtnj.org/family-resources/district-calendar/2026-2027-annual-calendar",
           "verifyNote": "Spring recess dates estimated \u2014 confirm against the Randolph Township PDF."
+        },
+        {
+          "id": "spf-nj",
+          "name": "Scotch Plains-Fanwood Public Schools",
+          "chapterCity": "Scotch Plains / Fanwood",
+          "state": "NJ",
+          "firstDay": "2026-09-02",
+          "lastDay": "2027-06-24",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.spfk12.org/spf-district-calendar"
+        },
+        {
+          "id": "montville-nj",
+          "name": "Montville Township Public Schools",
+          "chapterCity": "Montville",
+          "state": "NJ",
+          "firstDay": "2026-08-27",
+          "lastDay": "2027-06-16",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-29 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.montville.net/documents/calendars/printable-calendars/424761"
         }
       ],
       "coverage": "Bergen to Ocean County, NJ"
