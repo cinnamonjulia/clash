@@ -46,8 +46,8 @@
     border-radius:10px; font-size:13.5px; background:var(--bg); }
   .result .nm { font-weight:600; } .result .rg { font-size:11px; color:var(--ink-soft); }
   .st { font-size:12px; padding:2px 8px; border-radius:999px; white-space:nowrap; }
-  .st.off{color:var(--off);background:var(--off-bg);} .st.in{color:var(--in);background:var(--in-bg);}
-  .st.wknd{color:var(--wknd);background:var(--wknd-bg);} .st.unknown{color:var(--ink-soft);background:var(--line);}
+  .st.great{color:var(--off);background:var(--off-bg);} .st.school{color:var(--warn);background:var(--warn-bg);}
+  .st.risky{color:var(--in);background:var(--in-bg);} .st.unknown{color:var(--ink-soft);background:var(--line);}
   .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:12px; }
   .legend span { display:inline-flex; align-items:center; gap:5px; } .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
   /* region overview grid */
@@ -140,16 +140,17 @@
     return da.getMonth()===db.getMonth() ? MONTHS[da.getMonth()]+" "+da.getDate()+"–"+db.getDate()
       : MONTHS[da.getMonth()]+" "+da.getDate()+" – "+MONTHS[db.getMonth()]+" "+db.getDate(); }
   function inRange(dt,r){ if(!r) return false; const [a,b]=r.split(" to "); return dt>=toDate(a)&&dt<=toDate(b); }
+  // Programming-quality of a date: great = teens home & free (weekend),
+  // school = weekday in class (evenings ok), risky = break/holiday (may be traveling).
   function statusOn(d,dt){
     if(!d.firstDay||!d.lastDay) return {kind:"unknown",label:"Dates pending"};
-    if(dt<toDate(d.firstDay)) return {kind:"off",label:"Before school starts"};
-    if(dt>toDate(d.lastDay)) return {kind:"off",label:"Summer break"};
-    if(inRange(dt,d.thanksgivingBreak)) return {kind:"off",label:"Thanksgiving break"};
-    if(inRange(dt,d.winterBreak)) return {kind:"off",label:"Winter break"};
-    if(inRange(dt,d.springBreak)) return {kind:"off",label:"Spring break"};
-    if(d.mlkDay && dt.getTime()===toDate(d.mlkDay).getTime()) return {kind:"off",label:"MLK Day"};
-    const dow=dt.getDay(); if(dow===0||dow===6) return {kind:"wknd",label:"Weekend"};
-    return {kind:"in",label:"School in session"};
+    if(dt<toDate(d.firstDay)||dt>toDate(d.lastDay)) return {kind:"risky",label:"Summer break"};
+    if(inRange(dt,d.thanksgivingBreak)) return {kind:"risky",label:"Thanksgiving break"};
+    if(inRange(dt,d.winterBreak)) return {kind:"risky",label:"Winter break"};
+    if(inRange(dt,d.springBreak)) return {kind:"risky",label:"Spring break"};
+    if(d.mlkDay && dt.getTime()===toDate(d.mlkDay).getTime()) return {kind:"risky",label:"Holiday (may travel)"};
+    const dow=dt.getDay(); if(dow===0||dow===6) return {kind:"great",label:"Weekend — free"};
+    return {kind:"school",label:"School day"};
   }
 
   // collect all districts from populated regions, tagged with region name
@@ -168,29 +169,30 @@
     results.innerHTML="";
     if(!val){ summary.textContent="Pick a date above."; return; }
     const dt=toDate(val);
-    let off=0,inn=0,wk=0,unk=0;
+    let great=0,school=0,risky=0,unk=0;
     districts.forEach(d=>{
       const s=statusOn(d,dt);
-      if(s.kind==="off")off++; else if(s.kind==="in")inn++; else if(s.kind==="wknd")wk++; else unk++;
+      if(s.kind==="great")great++; else if(s.kind==="school")school++; else if(s.kind==="risky")risky++; else unk++;
       const el=document.createElement("div"); el.className="result";
       el.innerHTML='<span><span class="nm">'+d.chapterCity+'</span>'+
         (showRegion?'<br><span class="rg">'+d._region+'</span>':'')+'</span>'+
         '<span class="st '+s.kind+'">'+s.label+'</span>';
       results.appendChild(el);
     });
-    const total=districts.length, free=off+wk;
-    let verdict = inn===0 ? "🟢 <b>Great window</b> — no district has a normal school day."
-      : inn<=Math.max(2,Math.round(total*0.2)) ? "🟡 <b>Mostly clear</b> — a few districts are in session."
-      : "🔴 <b>Busy school day</b> for most districts.";
-    summary.innerHTML = verdict+"<br><b>"+free+"</b> of "+total+" districts off ("+off+" break/holiday, "+wk+" weekend) · <b>"+inn+"</b> in session"+(unk?" · "+unk+" pending":"");
+    const total=districts.length;
+    let verdict = great===total ? "🟢 <b>Great window</b> — it's a weekend; teens are home &amp; free."
+      : risky===total ? "🔴 <b>Risky</b> — school break/holiday; teens may be traveling."
+      : risky===0 ? "🟡 <b>School day</b> — good for evenings &amp; weekends, not daytime."
+      : "🟠 <b>Mixed</b> — some districts on break (teens may be away).";
+    summary.innerHTML = verdict+"<br><b>"+great+"</b> home · <b>"+school+"</b> in school · <b>"+risky+"</b> break/holiday"+(unk?" · "+unk+" pending":"");
   }
   function checkerCard(title, sub){
     return '<section class="card"><h2>'+title+'</h2><p class="h2sub">'+sub+'</p>'+
       '<input type="date" min="2026-07-01" max="2027-08-31" value="'+DEFAULT_DATE+'">'+
       '<div class="summary"></div><div class="result-grid"></div>'+
-      '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> School off (free)</span>'+
-      '<span><span class="dot" style="background:var(--wknd)"></span> Weekend</span>'+
-      '<span><span class="dot" style="background:var(--in)"></span> In session</span></div></section>';
+      '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> Weekend — teens home</span>'+
+      '<span><span class="dot" style="background:var(--warn)"></span> School day (eves)</span>'+
+      '<span><span class="dot" style="background:var(--in)"></span> Break/holiday — may travel</span></div></section>';
   }
 
   // ---- district card ----
@@ -213,11 +215,12 @@
     const pops=DATA.regions.filter(r=>r.status==="populated");
     view.innerHTML =
       '<section class="card"><h2>Is this date clear? — Entire Order</h2>'+
-      '<p class="h2sub">Which BBYO regions are clear (no school) on your date. '+pops.length+' of '+DATA.regions.length+' regions have dates loaded so far.</p>'+
+      '<p class="h2sub">Which regions are a good programming window. 🟢 weekend = teens home &amp; free · 🟡 school day = evenings only · 🔴 break/holiday = teens may be traveling. '+pops.length+' of '+DATA.regions.length+' regions loaded so far.</p>'+
       '<input type="date" min="2026-07-01" max="2027-08-31" value="'+DEFAULT_DATE+'">'+
       '<div class="summary" id="ordersum"></div><div class="result-grid" id="orderres"></div>'+
-      '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> Region clear</span>'+
-      '<span><span class="dot" style="background:var(--in)"></span> Some schools in session</span></div></section>'+
+      '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> Weekend — teens home</span>'+
+      '<span><span class="dot" style="background:var(--warn)"></span> School day</span>'+
+      '<span><span class="dot" style="background:var(--in)"></span> Break/holiday — may travel</span></div></section>'+
       '<section class="card"><h2>Regions</h2><p class="h2sub">Pick a region to see its schools by district. ✓ = dates loaded · ⏳ = being gathered.</p><div class="rgrid" id="rgrid"></div></section>';
     const input=view.querySelector("input");
     input.addEventListener("input",()=>renderOrderResults(input.value,pops));
@@ -241,21 +244,25 @@
     if(!pops.length){ sum.textContent="No regions loaded yet."; return; }
     if(!val){ sum.textContent="Pick a date above."; return; }
     const dt=toDate(val);
-    const clear=[];
+    const home=[];
     pops.forEach(r=>{
-      let inn=0; r.districts.forEach(d=>{ if(statusOn(d,dt).kind==="in") inn++; });
+      let g=0,sc=0,rk=0;
+      r.districts.forEach(d=>{ const k=statusOn(d,dt).kind; if(k==="great")g++; else if(k==="school")sc++; else if(k==="risky")rk++; });
+      const total=r.districts.length;
+      let cls,label;
+      if(g===total){ cls="great"; label="Weekend — teens home"; home.push(r.name); }
+      else if(rk===total){ cls="risky"; label="Break/holiday — may travel"; }
+      else if(rk===0){ cls="school"; label="School day (eves only)"; }
+      else { cls="risky"; label=rk+" on break · "+sc+" in school"; }
       const el=document.createElement("div"); el.className="result";
-      if(inn===0){ clear.push(r.name);
-        el.innerHTML='<span class="nm">'+r.name+'</span><span class="st off">Clear</span>'; }
-      else {
-        el.innerHTML='<span class="nm">'+r.name+'</span><span class="st in">'+inn+' school'+(inn>1?"s":"")+' in session</span>'; }
+      el.innerHTML='<span class="nm">'+r.name+'</span><span class="st '+cls+'">'+label+'</span>';
       res.appendChild(el);
     });
     const pending=DATA.regions.length-pops.length;
-    const head = clear.length ? "🟢 <b>Clear regions:</b> "+clear.join(", ")
-                              : "🔴 No loaded region is fully clear on this date.";
-    sum.innerHTML = head + "<br><b>"+clear.length+"</b> of "+pops.length+" loaded regions clear"+
-      (pending?" · "+pending+" more regions still being gathered":"");
+    const head = home.length ? "🟢 <b>Teens home &amp; free:</b> "+home.join(", ")
+                             : "🟡 No region is a weekend/home window today — check each for evenings vs. travel.";
+    sum.innerHTML = head + "<br><b>"+home.length+"</b> of "+pops.length+" loaded regions are a teens-home window"+
+      (pending?" · "+pending+" more still being gathered":"");
   }
 
   function renderRegion(r){
