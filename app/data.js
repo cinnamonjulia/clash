@@ -799,6 +799,64 @@ window.CALENDER_DATA = {
           "verify": true,
           "source": "https://www.jcboe.org/apps/pages/index.jsp?uREC_ID=1780572&type=d&pREC_ID=2249276",
           "verifyNote": "Calendar is the 2/9/26 board DRAFT \u2014 confirm final adopted version (esp. last day June 24)."
+        },
+        {
+          "id": "fairlawn-nj",
+          "name": "Fair Lawn Public Schools",
+          "chapterCity": "Fair Lawn",
+          "state": "NJ",
+          "firstDay": "2026-09-08",
+          "lastDay": "2027-06-23",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-04-19 to 2027-04-23",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-23",
+          "teacherWorkdays": [],
+          "halfDays": [
+            "2026-12-23",
+            "2027-06-22",
+            "2027-06-23"
+          ],
+          "verify": false,
+          "source": "https://www.fairlawnschools.org/page/hr-calendars"
+        },
+        {
+          "id": "weehawken-nj",
+          "name": "Weehawken Township School District",
+          "chapterCity": "Weehawken",
+          "state": "NJ",
+          "firstDay": "2026-09-08",
+          "lastDay": "2027-06-21",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-26 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-17",
+          "teacherWorkdays": [],
+          "halfDays": [
+            "2026-12-23",
+            "2027-06-21"
+          ],
+          "verify": false,
+          "source": "https://www.weehawkenschools.net/apps/pages/index.jsp?uREC_ID=367530&type=d&pREC_ID=993439"
+        },
+        {
+          "id": "cwc-nj",
+          "name": "Caldwell-West Caldwell Public Schools",
+          "chapterCity": "Caldwell",
+          "state": "NJ",
+          "firstDay": "2026-09-02",
+          "lastDay": "2027-06-22",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-04-12 to 2027-04-16",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.cwcboe.org/o/cwcps/page/calendars"
         }
       ],
       "coverage": "Bergen to Ocean County, NJ"
