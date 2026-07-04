@@ -905,18 +905,169 @@
         "IN",
         "OH"
       ],
-      "status": "pending",
-      "hubs": [
-        "Louisville",
-        "Lexington",
-        "Indianapolis",
-        "Bloomington",
-        "South Bend",
-        "Cincinnati",
-        "Dayton",
-        "Columbus"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "jcps-ky",
+          "name": "Jefferson County Public Schools",
+          "chapterCity": "Louisville",
+          "state": "KY",
+          "firstDay": "2026-08-06",
+          "lastDay": "2027-05-24",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-29 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.jefferson.kyschools.us/o/jcps/page/calendar-at-a-glance",
+          "fallBreak": "2026-09-28 to 2026-10-02"
+        },
+        {
+          "id": "fayette-ky",
+          "name": "Fayette County Public Schools",
+          "chapterCity": "Lexington",
+          "state": "KY",
+          "firstDay": "2026-08-12",
+          "lastDay": "2027-05-26",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-04-05 to 2027-04-12",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.fcps.net/news-calendars/calendar",
+          "fallBreak": "2026-09-28 to 2026-10-02"
+        },
+        {
+          "id": "msdwt-in",
+          "name": "MSD Washington Township",
+          "chapterCity": "Indianapolis (North Central)",
+          "state": "IN",
+          "firstDay": "2026-08-06",
+          "lastDay": "2027-05-26",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-29 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-08-04",
+            "2026-08-05",
+            "2027-05-27"
+          ],
+          "halfDays": [
+            "2027-05-26"
+          ],
+          "verify": true,
+          "source": "https://www.msdwt.k12.in.us/calendar",
+          "fallBreak": "2026-10-09 to 2026-10-09",
+          "verifyNote": "Confirm spring-break start (MSDWT has run 2-week breaks; PDF confirms end Apr 2) and Thanksgiving start."
+        },
+        {
+          "id": "mccsc-in",
+          "name": "Monroe County CSC",
+          "chapterCity": "Bloomington",
+          "state": "IN",
+          "firstDay": "2026-08-05",
+          "lastDay": "2027-05-20",
+          "thanksgivingBreak": "2026-11-23 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-15 to 2027-03-19",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-08-04"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.mccsc.edu/calendars",
+          "fallBreak": "2026-10-15 to 2026-10-16"
+        },
+        {
+          "id": "southbend-in",
+          "name": "South Bend Community School Corp",
+          "chapterCity": "South Bend",
+          "state": "IN",
+          "firstDay": "2026-08-19",
+          "lastDay": "2027-06-04",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-04-05 to 2027-04-09",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-10-22",
+            "2027-01-15"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.sb.school/calendar",
+          "fallBreak": "2026-10-23 to 2026-10-26"
+        },
+        {
+          "id": "sycamore-oh",
+          "name": "Sycamore Community Schools",
+          "chapterCity": "Cincinnati (Blue Ash)",
+          "state": "OH",
+          "firstDay": "2026-08-20",
+          "lastDay": "2027-05-21",
+          "thanksgivingBreak": "2026-11-24 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-15 to 2027-03-19",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-08-12"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.sycamoreschools.org/about-us/calendar"
+        },
+        {
+          "id": "bexley-oh",
+          "name": "Bexley City Schools",
+          "chapterCity": "Columbus (Bexley)",
+          "state": "OH",
+          "firstDay": "2026-08-13",
+          "lastDay": "2027-05-28",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-15 to 2027-03-19",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-05-23",
+          "teacherWorkdays": [
+            "2026-11-03",
+            "2027-05-04"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.bexley.us/our-district/district-calendar"
+        },
+        {
+          "id": "centerville-oh",
+          "name": "Centerville City Schools",
+          "chapterCity": "Dayton (Centerville)",
+          "state": "OH",
+          "firstDay": "2026-08-12",
+          "lastDay": "2027-05-26",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-19 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-05-22",
+          "teacherWorkdays": [
+            "2026-08-10"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.centerville.k12.oh.us/about-us/calendars"
+        }
       ],
-      "districts": [],
       "coverage": "Kentucky, Indiana & Southern Ohio"
     },
     {
