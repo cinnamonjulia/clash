@@ -47,7 +47,8 @@
   .result .nm { font-weight:600; } .result .rg { font-size:11px; color:var(--ink-soft); }
   .st { font-size:12px; padding:2px 8px; border-radius:999px; white-space:nowrap; }
   .st.great{color:var(--off);background:var(--off-bg);} .st.school{color:var(--warn);background:var(--warn-bg);}
-  .st.risky{color:var(--in);background:var(--in-bg);} .st.unknown{color:var(--ink-soft);background:var(--line);}
+  .st.risky{color:var(--in);background:var(--in-bg);} .st.flex{color:var(--wknd);background:var(--wknd-bg);}
+  .st.unknown{color:var(--ink-soft);background:var(--line);}
   .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:12px; }
   .legend span { display:inline-flex; align-items:center; gap:5px; } .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
   /* region overview grid */
@@ -135,6 +136,7 @@
 
   // ---- date helpers ----
   const toDate = s => { if(!s) return null; const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); };
+  const isoOf = dt => dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0");
   const fmt = s => { const dt=toDate(s); return dt? MONTHS[dt.getMonth()]+" "+dt.getDate() : null; };
   function fmtRange(r){ if(!r) return null; const [a,b]=r.split(" to "); const da=toDate(a),db=toDate(b);
     return da.getMonth()===db.getMonth() ? MONTHS[da.getMonth()]+" "+da.getDate()+"–"+db.getDate()
@@ -149,6 +151,9 @@
     if(inRange(dt,d.winterBreak)) return {kind:"risky",label:"Winter break"};
     if(inRange(dt,d.springBreak)) return {kind:"risky",label:"Spring break"};
     if(d.mlkDay && dt.getTime()===toDate(d.mlkDay).getTime()) return {kind:"risky",label:"Holiday (may travel)"};
+    const iso=isoOf(dt);
+    if(d.teacherWorkdays && d.teacherWorkdays.indexOf(iso)>=0) return {kind:"flex",label:"Teacher workday — teens off"};
+    if(d.halfDays && d.halfDays.indexOf(iso)>=0) return {kind:"flex",label:"Half day — out early"};
     const dow=dt.getDay(); if(dow===0||dow===6) return {kind:"great",label:"Weekend — free"};
     return {kind:"school",label:"School day"};
   }
@@ -169,10 +174,10 @@
     results.innerHTML="";
     if(!val){ summary.textContent="Pick a date above."; return; }
     const dt=toDate(val);
-    let great=0,school=0,risky=0,unk=0;
+    let great=0,school=0,risky=0,flex=0,unk=0;
     districts.forEach(d=>{
       const s=statusOn(d,dt);
-      if(s.kind==="great")great++; else if(s.kind==="school")school++; else if(s.kind==="risky")risky++; else unk++;
+      if(s.kind==="great")great++; else if(s.kind==="school")school++; else if(s.kind==="risky")risky++; else if(s.kind==="flex")flex++; else unk++;
       const el=document.createElement("div"); el.className="result";
       el.innerHTML='<span><span class="nm">'+d.chapterCity+'</span>'+
         (showRegion?'<br><span class="rg">'+d._region+'</span>':'')+'</span>'+
@@ -182,9 +187,10 @@
     const total=districts.length;
     let verdict = great===total ? "🟢 <b>Great window</b> — it's a weekend; teens are home &amp; free."
       : risky===total ? "🔴 <b>Risky</b> — school break/holiday; teens may be traveling."
+      : flex===total ? "🩵 <b>Teacher/half day</b> — teens are off school; nice chance (double-check for long-weekend trips)."
       : risky===0 ? "🟡 <b>School day</b> — good for evenings &amp; weekends, not daytime."
       : "🟠 <b>Mixed</b> — some districts on break (teens may be away).";
-    summary.innerHTML = verdict+"<br><b>"+great+"</b> home · <b>"+school+"</b> in school · <b>"+risky+"</b> break/holiday"+(unk?" · "+unk+" pending":"");
+    summary.innerHTML = verdict+"<br><b>"+great+"</b> home · <b>"+school+"</b> in school · <b>"+risky+"</b> break/holiday"+(flex?" · <b>"+flex+"</b> teacher/half day":"")+(unk?" · "+unk+" pending":"");
   }
   function checkerCard(title, sub){
     return '<section class="card"><h2>'+title+'</h2><p class="h2sub">'+sub+'</p>'+
@@ -192,6 +198,7 @@
       '<div class="summary"></div><div class="result-grid"></div>'+
       '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> Weekend — teens home</span>'+
       '<span><span class="dot" style="background:var(--warn)"></span> School day (eves)</span>'+
+      '<span><span class="dot" style="background:var(--wknd)"></span> Teacher/half day</span>'+
       '<span><span class="dot" style="background:var(--in)"></span> Break/holiday — may travel</span></div></section>';
   }
 
@@ -220,6 +227,7 @@
       '<div class="summary" id="ordersum"></div><div class="result-grid" id="orderres"></div>'+
       '<div class="legend"><span><span class="dot" style="background:var(--off)"></span> Weekend — teens home</span>'+
       '<span><span class="dot" style="background:var(--warn)"></span> School day</span>'+
+      '<span><span class="dot" style="background:var(--wknd)"></span> Teacher/half day</span>'+
       '<span><span class="dot" style="background:var(--in)"></span> Break/holiday — may travel</span></div></section>'+
       '<section class="card"><h2>Regions</h2><p class="h2sub">Pick a region to see its schools by district. ✓ = dates loaded · ⏳ = being gathered.</p><div class="rgrid" id="rgrid"></div></section>';
     const input=view.querySelector("input");
@@ -247,7 +255,7 @@
     const home=[];
     pops.forEach(r=>{
       let g=0,sc=0,rk=0;
-      r.districts.forEach(d=>{ const k=statusOn(d,dt).kind; if(k==="great")g++; else if(k==="school")sc++; else if(k==="risky")rk++; });
+      r.districts.forEach(d=>{ const k=statusOn(d,dt).kind; if(k==="great")g++; else if(k==="risky")rk++; else if(k==="school"||k==="flex")sc++; });
       const total=r.districts.length;
       let cls,label;
       if(g===total){ cls="great"; label="Weekend — teens home"; home.push(r.name); }
