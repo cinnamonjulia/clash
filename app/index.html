@@ -146,6 +146,7 @@
   function breakLabel(d,dt){
     if(dt<toDate(d.firstDay)||dt>toDate(d.lastDay)) return "Summer break";
     if(inRange(dt,d.fallBreak)) return "Fall break";
+    if(inRange(dt,d.midwinterBreak)) return "Mid-winter break";
     if(inRange(dt,d.thanksgivingBreak)) return "Thanksgiving break";
     if(inRange(dt,d.winterBreak)) return "Winter break";
     if(inRange(dt,d.springBreak)) return "Spring break";
@@ -225,6 +226,7 @@
     h+='<dl class="dates">'+row("First day",fmt(d.firstDay))+row("Last day",fmt(d.lastDay))+
       (d.fallBreak?row("Fall break",fmtRange(d.fallBreak)):"")+
       row("Thanksgiving",fmtRange(d.thanksgivingBreak))+row("Winter break",fmtRange(d.winterBreak))+
+      (d.midwinterBreak?row("Mid-winter break",fmtRange(d.midwinterBreak)):"")+
       row("Spring break",fmtRange(d.springBreak))+row("Graduation",fmt(d.graduation))+'</dl>';
     if(d.verify&&d.verifyNote) h+='<div class="warnflag">⚠️ '+d.verifyNote+'</div>';
     el.innerHTML=h; return el;
