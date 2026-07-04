@@ -3,7 +3,7 @@ window.CALENDER_DATA = {
   "order": "BBYO",
   "schoolYear": "2026-2027",
   "lastGathered": "2026-07-03",
-  "note": "Region list is official (bbyo.org). Eastern Region districts are gathered/populated. All other regions are scaffolded (status:pending) with known chapter hubs; their district calendars still need gathering + verification.",
+  "note": "Region list + coverage/chapter cities pulled directly from bbyo.org. Eastern Region districts are gathered/populated. Other regions are scaffolded (status:pending) with real bbyo.org chapter areas; their district calendars still need gathering.",
   "regions": [
     {
       "id": "eastern",
@@ -272,10 +272,18 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Westchester",
-        "Rockland"
+        "Park Slope",
+        "Cobble Hill",
+        "Forest Hills",
+        "Rego Park",
+        "Bayside",
+        "Little Neck",
+        "Great Neck",
+        "Mill Basin",
+        "East Midwood"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Brooklyn, Queens & Great Neck, NY"
     },
     {
       "id": "connecticut-valley",
@@ -286,43 +294,72 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Hartford",
+        "Stamford",
+        "Greenwich",
+        "Westport",
+        "Norwalk",
+        "Fairfield",
+        "Bridgeport",
         "West Hartford",
-        "Springfield"
+        "Madison",
+        "New London",
+        "Cheshire",
+        "Southbury",
+        "Woodbridge",
+        "Springfield, MA"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Connecticut & Western Massachusetts"
     },
     {
       "id": "delta",
       "name": "Delta Region",
       "states": [
         "AL",
+        "AR",
         "LA",
         "MS",
         "TN"
       ],
       "status": "pending",
       "hubs": [
-        "Birmingham",
-        "New Orleans",
+        "Nashville",
         "Memphis",
-        "Jackson"
+        "Knoxville",
+        "New Orleans",
+        "Birmingham",
+        "Huntsville"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Alabama, Arkansas, Louisiana, Mississippi & Tennessee"
     },
     {
       "id": "evergreen",
       "name": "Evergreen Region",
       "states": [
         "WA",
-        "OR"
+        "OR",
+        "ID",
+        "MT",
+        "AK"
       ],
       "status": "pending",
       "hubs": [
         "Seattle",
-        "Portland"
+        "Tacoma",
+        "Olympia",
+        "Spokane",
+        "Portland",
+        "Eugene",
+        "Corvallis",
+        "Bend",
+        "Ashland",
+        "Boise",
+        "Sun Valley",
+        "Anchorage"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Pacific Northwest (WA, OR, ID, MT, AK)"
     },
     {
       "id": "gold-coast",
@@ -332,11 +369,19 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Fort Lauderdale",
         "Boca Raton",
-        "West Palm Beach"
+        "Boynton Beach",
+        "West Palm Beach",
+        "Palm Beach",
+        "Coral Springs",
+        "Davie",
+        "Plantation",
+        "Weston",
+        "Stuart",
+        "Naples"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Broward, Palm Beach & Collier Counties, FL"
     },
     {
       "id": "great-midwest",
@@ -347,13 +392,25 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Chicago",
+        "Buffalo Grove",
+        "Deerfield",
+        "Evanston",
+        "Highland Park",
         "Northbrook",
         "Skokie",
-        "Deerfield",
-        "Buffalo Grove",
-        "Naperville"
+        "Wilmette",
+        "Vernon Hills",
+        "Naperville",
+        "Oak Park",
+        "Lombard",
+        "Flossmoor",
+        "Homewood",
+        "Champaign",
+        "Peoria",
+        "Springfield"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Chicago & suburbs"
     },
     {
       "id": "greater-atlanta",
@@ -365,9 +422,14 @@ window.CALENDER_DATA = {
       "hubs": [
         "Atlanta",
         "Sandy Springs",
-        "Marietta"
+        "Dunwoody",
+        "East Cobb",
+        "Alpharetta",
+        "Johns Creek",
+        "Athens"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Metro Atlanta"
     },
     {
       "id": "greater-jersey",
@@ -378,10 +440,29 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Livingston",
+        "Millburn",
+        "Montclair",
+        "Maplewood",
         "West Orange",
-        "Bergen County"
+        "Caldwell",
+        "Fair Lawn",
+        "Glen Rock",
+        "Ridgewood",
+        "Wayne",
+        "Randolph",
+        "Montville",
+        "Basking Ridge",
+        "Westfield",
+        "Scotch Plains",
+        "East Brunswick",
+        "Marlboro",
+        "Manalapan",
+        "Hoboken",
+        "Jersey City",
+        "Weehawken"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Bergen to Ocean County, NJ"
     },
     {
       "id": "hawaii",
@@ -391,9 +472,10 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Honolulu"
+        "Maui"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Hawaii (Maui, growing)"
     },
     {
       "id": "hudson-valley",
@@ -403,10 +485,21 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Poughkeepsie",
-        "Nyack"
+        "Scarsdale",
+        "Harrison",
+        "Armonk",
+        "Chappaqua",
+        "Mt. Kisco",
+        "Ardsley",
+        "Mamaroneck",
+        "New Rochelle",
+        "Rye",
+        "Rye Brook",
+        "Purchase",
+        "Port Chester"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Westchester County & Hudson Valley, NY"
     },
     {
       "id": "kio",
@@ -419,12 +512,16 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Louisville",
+        "Lexington",
         "Indianapolis",
+        "Bloomington",
+        "South Bend",
         "Cincinnati",
         "Dayton",
         "Columbus"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Kentucky, Indiana & Southern Ohio"
     },
     {
       "id": "keystone-mountain",
@@ -436,10 +533,10 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Pittsburgh",
-        "Morgantown",
-        "Charleston WV"
+        "Wexford"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Western Pennsylvania & West Virginia"
     },
     {
       "id": "liberty",
@@ -447,16 +544,35 @@ window.CALENDER_DATA = {
       "states": [
         "PA",
         "DE",
-        "NY"
+        "NY",
+        "NJ"
       ],
       "status": "pending",
       "hubs": [
         "Philadelphia",
-        "Wilmington",
+        "Bryn Mawr",
+        "West Chester",
+        "Newtown",
+        "New Hope",
+        "Holland",
+        "Lafayette Hill",
+        "Allentown",
+        "Reading",
+        "Lancaster",
+        "York",
+        "Harrisburg",
+        "Scranton",
+        "Wilkes-Barre",
+        "Wilmington, DE",
         "Binghamton",
-        "Elmira"
+        "Ithaca",
+        "Rochester",
+        "Syracuse",
+        "Buffalo",
+        "Princeton, NJ"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Eastern PA, Delaware & Upstate NY"
     },
     {
       "id": "lonestar",
@@ -470,7 +586,8 @@ window.CALENDER_DATA = {
         "Austin",
         "San Antonio"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Houston, Austin & San Antonio"
     },
     {
       "id": "manhattan",
@@ -480,9 +597,11 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Manhattan"
+        "Manhattan",
+        "Riverdale (Bronx)"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Manhattan & The Bronx"
     },
     {
       "id": "miami",
@@ -493,10 +612,11 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Miami",
-        "Aventura",
-        "Kendall"
+        "Miami Beach",
+        "Aventura"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Miami-Dade & Monroe Counties"
     },
     {
       "id": "michigan",
@@ -507,10 +627,12 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "West Bloomfield",
-        "Farmington Hills",
-        "Detroit"
+        "Bloomfield Hills",
+        "Ann Arbor",
+        "Lansing"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Metro Detroit & Michigan"
     },
     {
       "id": "midam-kc",
@@ -524,7 +646,8 @@ window.CALENDER_DATA = {
         "Overland Park",
         "Kansas City"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Greater Kansas City"
     },
     {
       "id": "midam-northstar",
@@ -535,10 +658,10 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Minneapolis",
-        "St. Paul",
-        "St. Louis Park"
+        "St. Paul"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Minnesota (Twin Cities)"
     },
     {
       "id": "midam-omaha",
@@ -550,9 +673,10 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Omaha",
-        "Des Moines"
+        "Sioux City"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Greater Omaha & Sioux City"
     },
     {
       "id": "midam-stlouis",
@@ -562,24 +686,30 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "St. Louis",
-        "Chesterfield"
+        "St. Louis"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "St. Louis"
     },
     {
       "id": "mountain",
       "name": "Mountain Region",
       "states": [
-        "AZ"
+        "AZ",
+        "NV",
+        "UT"
       ],
       "status": "pending",
       "hubs": [
         "Phoenix",
-        "Scottsdale",
-        "Tucson"
+        "Tucson",
+        "Peoria",
+        "Las Vegas",
+        "Salt Lake City",
+        "Park City"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Arizona, Nevada & Utah"
     },
     {
       "id": "nassau-suffolk",
@@ -589,11 +719,25 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Plainview",
         "Syosset",
-        "Commack"
+        "Plainview",
+        "Jericho",
+        "Commack",
+        "Dix Hills",
+        "Smithtown",
+        "Northport",
+        "Merrick",
+        "East Meadow",
+        "Oceanside",
+        "Rockville Centre",
+        "Long Beach",
+        "Hempstead",
+        "Port Washington",
+        "Roslyn Heights",
+        "Five Towns"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Long Island, NY"
     },
     {
       "id": "new-england",
@@ -602,15 +746,27 @@ window.CALENDER_DATA = {
         "MA",
         "NH",
         "RI",
-        "ME"
+        "ME",
+        "VT"
       ],
       "status": "pending",
       "hubs": [
-        "Boston",
         "Newton",
-        "Sharon"
+        "Brookline",
+        "Sharon",
+        "Acton",
+        "Holliston",
+        "Metrowest",
+        "North Shore",
+        "Andover",
+        "Worcester",
+        "Providence",
+        "East Greenwich",
+        "Nashua",
+        "Portland, ME"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Eastern/Central MA, VT, NH, RI & ME"
     },
     {
       "id": "north-florida",
@@ -620,11 +776,15 @@ window.CALENDER_DATA = {
       ],
       "status": "pending",
       "hubs": [
-        "Jacksonville",
-        "Orlando",
-        "Tampa"
+        "Tampa",
+        "Sarasota",
+        "Fort Myers",
+        "Gainesville",
+        "Maitland (Orlando)",
+        "Melbourne"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "West Coast, Central & North Florida"
     },
     {
       "id": "north-texas-oklahoma",
@@ -636,11 +796,14 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Dallas",
-        "Plano",
+        "Fort Worth",
+        "Arlington",
+        "Southlake",
         "Oklahoma City",
         "Tulsa"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "DFW Metroplex & Oklahoma"
     },
     {
       "id": "nre-baltimore",
@@ -652,9 +815,11 @@ window.CALENDER_DATA = {
       "hubs": [
         "Baltimore",
         "Owings Mills",
-        "Pikesville"
+        "Reisterstown",
+        "Anne Arundel County"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Baltimore City & County"
     },
     {
       "id": "nre-dc",
@@ -667,9 +832,13 @@ window.CALENDER_DATA = {
       "hubs": [
         "Washington DC",
         "Rockville",
-        "Bethesda"
+        "Bethesda",
+        "Potomac",
+        "Columbia, MD",
+        "Frederick"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "DC & Montgomery/Howard/Frederick Counties, MD"
     },
     {
       "id": "nre-nova",
@@ -681,10 +850,11 @@ window.CALENDER_DATA = {
       "hubs": [
         "Fairfax",
         "Arlington",
-        "Alexandria",
+        "Springfield",
         "Loudoun"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Northern Virginia (Arlington, Fairfax, Loudoun)"
     },
     {
       "id": "ohio-northern",
@@ -695,10 +865,13 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Cleveland",
-        "Beachwood",
-        "Akron"
+        "Akron",
+        "Canton",
+        "Youngstown",
+        "Toledo"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Northern Ohio"
     },
     {
       "id": "pacific-western",
@@ -727,14 +900,25 @@ window.CALENDER_DATA = {
       "id": "rocky-mountain",
       "name": "Rocky Mountain Region",
       "states": [
-        "CO"
+        "CO",
+        "NM",
+        "WY"
       ],
       "status": "pending",
       "hubs": [
         "Denver",
-        "Boulder"
+        "Boulder",
+        "Colorado Springs",
+        "Fort Collins",
+        "Aspen",
+        "Vail",
+        "Telluride",
+        "Steamboat Springs",
+        "Albuquerque",
+        "Jackson Hole"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Colorado, New Mexico & Wyoming"
     },
     {
       "id": "south-jersey",
@@ -747,7 +931,8 @@ window.CALENDER_DATA = {
         "Cherry Hill",
         "Voorhees"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Southern New Jersey (Cherry Hill to the Shore)"
     },
     {
       "id": "wisconsin",
@@ -758,9 +943,11 @@ window.CALENDER_DATA = {
       "status": "pending",
       "hubs": [
         "Milwaukee",
-        "Madison"
+        "Madison",
+        "Appleton"
       ],
-      "districts": []
+      "districts": [],
+      "coverage": "Wisconsin (Milwaukee & Madison)"
     },
     {
       "id": "central-region-west",
