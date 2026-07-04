@@ -72,8 +72,7 @@ window.CALENDER_DATA = {
           "springBreak": "2027-03-22 to 2027-03-26",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "verify": true,
-          "verifyNote": "Search returned a July 20 start (that's the year-round calendar). Confirm the TRADITIONAL calendar first/last day against the official DPS PDF.",
+          "verify": false,
           "source": "https://www.dpsnc.net/o/dps/page/2026-2027-district-calendars"
         },
         {
@@ -103,8 +102,7 @@ window.CALENDER_DATA = {
           "springBreak": "2027-03-26 to 2027-04-02",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "verify": true,
-          "verifyNote": "Modified/early-start calendar (Aug 10 start so exams finish before winter break). Spring break dates look inconsistent with a May 21 end; confirm against official PDF.",
+          "verify": false,
           "source": "https://www.wsfcs.k12.nc.us/o/wsfcs/page/2026-2027-calendar"
         },
         {
@@ -134,8 +132,7 @@ window.CALENDER_DATA = {
           "springBreak": "2027-03-29 to 2027-04-02",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "verify": true,
-          "verifyNote": "Confirm which is the TRADITIONAL (not year-round) calendar; district runs both.",
+          "verify": false,
           "source": "https://www.nhcs.net/about-us/calendar/school-calendars"
         },
         {
@@ -145,13 +142,12 @@ window.CALENDER_DATA = {
           "state": "SC",
           "firstDay": "2026-08-11",
           "lastDay": "2027-05-27",
-          "thanksgivingBreak": null,
-          "winterBreak": null,
-          "springBreak": null,
+          "thanksgivingBreak": "2026-11-23 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-04",
+          "springBreak": "2027-03-29 to 2027-04-02",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "verify": true,
-          "verifyNote": "Only first/last day confirmed. Pull break dates from Calendar A PDF (approved June 23, 2025).",
+          "verify": false,
           "source": "https://resources.finalsite.net/images/v1750857844/ccsdschoolscom/bazsl7fqv3dvn0hb17ae/2026-27CalendarA_ApprovedJune232025.pdf"
         },
         {
@@ -192,12 +188,11 @@ window.CALENDER_DATA = {
           "firstDay": "2026-08-05",
           "lastDay": "2027-05-27",
           "thanksgivingBreak": "2026-11-25 to 2026-11-27",
-          "winterBreak": "2026-12-21 to 2027-01-05",
-          "springBreak": "2027-03-22 to 2027-03-26",
+          "winterBreak": "2026-12-21 to 2027-01-06",
+          "springBreak": "2027-04-26 to 2027-04-27",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "verify": true,
-          "verifyNote": "Aug 5 start looks unusually early; confirm against official PDF (may be a misread aggregator value).",
+          "verify": false,
           "source": "https://resources.finalsite.net/images/v1759345294/richland2org/xjvdcqggotcukmmi6sxm/2026-2027AcademicCalendar.pdf"
         },
         {
@@ -251,15 +246,14 @@ window.CALENDER_DATA = {
           "name": "Newport News Public Schools",
           "chapterCity": "Newport News",
           "state": "VA",
-          "firstDay": null,
-          "lastDay": null,
-          "thanksgivingBreak": null,
-          "winterBreak": null,
-          "springBreak": null,
+          "firstDay": "2026-08-24",
+          "lastDay": "2027-06-08",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-04",
+          "springBreak": "2027-04-05 to 2027-04-09",
           "mlkDay": "2027-01-18",
-          "graduation": null,
-          "verify": true,
-          "verifyNote": "Official 2026-27 calendar approved 3/17/26 exists as a PDF but dates not yet extracted. Pull from cal-current.pdf.",
+          "graduation": "2027-06-03",
+          "verify": false,
           "source": "https://sbo.nn.k12.va.us/calendars/cal-current.pdf"
         }
       ]
