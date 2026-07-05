@@ -224,7 +224,9 @@
   function districtCard(d){
     const el=document.createElement("div"); el.className="district";
     let h='<div class="top"><div><div class="name">'+(d.verify?"⚠️ ":"")+d.name+'</div>'+
-      '<div class="city">'+d.chapterCity+'</div></div><span class="chip">'+d.state+'</span></div>';
+      '<div class="city">'+d.chapterCity+'</div></div><span>'+
+      (d.type==="dayschool"?'<span class="chip" style="background:var(--brand);color:#161046;margin-right:4px;">✡ Day School</span>':'')+
+      '<span class="chip">'+d.state+'</span></span></div>';
     h+='<dl class="dates">'+row("First day",fmt(d.firstDay))+row("Last day",fmt(d.lastDay))+
       (d.fallBreak?row("Fall break",fmtRange(d.fallBreak)):"")+
       row("Thanksgiving",fmtRange(d.thanksgivingBreak))+row("Winter break",fmtRange(d.winterBreak))+

@@ -322,6 +322,44 @@ window.CALENDER_DATA = {
               "label": "Spring Recess I"
             }
           ]
+        },
+        {
+          "id": "flatbush-ds",
+          "name": "Yeshivah of Flatbush Joel Braverman HS",
+          "chapterCity": "Brooklyn",
+          "state": "NY",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026. Closed for all Jewish holidays.",
+          "source": "https://www.flatbush.org"
+        },
+        {
+          "id": "nsha-ds",
+          "name": "North Shore Hebrew Academy HS",
+          "chapterCity": "Great Neck",
+          "state": "NY",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026. Closed for all Jewish holidays.",
+          "source": "https://www.nsha.org/hs/"
         }
       ],
       "coverage": "Brooklyn, Queens & Great Neck, NY"
@@ -889,6 +927,44 @@ window.CALENDER_DATA = {
           "halfDays": [],
           "verify": false,
           "source": "https://www.cwcboe.org/o/cwcps/page/calendars"
+        },
+        {
+          "id": "goldaoch-ds",
+          "name": "Golda Och Academy (Upper School)",
+          "chapterCity": "West Orange",
+          "state": "NJ",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "source": "https://www.goldaochacademy.org"
+        },
+        {
+          "id": "kushner-ds",
+          "name": "Rae Kushner Yeshiva High School",
+          "chapterCity": "Livingston",
+          "state": "NJ",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "source": "https://www.rkyhs.org"
         }
       ],
       "coverage": "Bergen to Ocean County, NJ"
@@ -1261,6 +1337,25 @@ window.CALENDER_DATA = {
           "verify": false,
           "source": "https://www.oakwoodschools.org/district/district-calendar",
           "midwinterBreak": "2027-02-16 to 2027-02-19"
+        },
+        {
+          "id": "cta-ds",
+          "name": "Columbus Torah Academy (HS)",
+          "chapterCity": "Columbus",
+          "state": "OH",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "source": "https://www.torahacademy.org"
         }
       ],
       "coverage": "Kentucky, Indiana & Southern Ohio"
@@ -2048,6 +2143,44 @@ window.CALENDER_DATA = {
           "graduation": null,
           "verify": false,
           "source": "https://www.scusd.edu/families/academic-calendars"
+        },
+        {
+          "id": "jchs-ds",
+          "name": "Jewish Community High School of the Bay",
+          "chapterCity": "San Francisco",
+          "state": "CA",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "source": "https://www.jchsofthebay.org"
+        },
+        {
+          "id": "kehillah-ds",
+          "name": "Kehillah Jewish High School",
+          "chapterCity": "Palo Alto",
+          "state": "CA",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "source": "https://www.kehillah.org"
         }
       ],
       "coverage": "SF Bay Area & Northern California"
