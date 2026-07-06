@@ -1,7 +1,7 @@
 {
   "order": "BBYO",
   "schoolYear": "2026-2027",
-  "lastGathered": "2026-07-03",
+  "lastGathered": "2026-07-05",
   "note": "Region list + coverage/chapter cities pulled directly from bbyo.org. Eastern Region districts are gathered/populated. Other regions are scaffolded (status:pending) with real bbyo.org chapter areas; their district calendars still need gathering.",
   "regions": [
     {
@@ -853,51 +853,78 @@
           "firstDay": "2026-08-10",
           "lastDay": "2027-05-27",
           "thanksgivingBreak": "2026-11-23 to 2026-11-27",
-          "winterBreak": "2026-12-21 to 2027-01-01",
+          "winterBreak": "2026-12-22 to 2027-01-01",
           "springBreak": "2027-03-22 to 2027-03-26",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "teacherWorkdays": [],
+          "teacherWorkdays": [
+            "2026-10-12",
+            "2026-11-03",
+            "2027-01-04",
+            "2027-02-15",
+            "2027-03-29"
+          ],
           "halfDays": [],
-          "verify": true,
-          "source": "https://www.palmbeachschools.org/studentsparents/school-calendar/2026-2027-key-dates",
-          "verifyNote": "Thanksgiving/winter assumed from FL pattern \u2014 confirm on PBC key-dates page."
+          "verify": false,
+          "source": "https://www.palmbeachschools.org/studentsparents/school-calendar/2026-2027-key-dates"
         },
         {
           "id": "collier-fl",
           "name": "Collier County Public Schools",
           "chapterCity": "Naples",
           "state": "FL",
-          "firstDay": null,
-          "lastDay": null,
-          "thanksgivingBreak": null,
-          "winterBreak": null,
-          "springBreak": null,
+          "firstDay": "2026-08-11",
+          "lastDay": "2027-05-27",
+          "thanksgivingBreak": "2026-11-23 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-29",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "teacherWorkdays": [],
-          "halfDays": [],
-          "verify": true,
-          "source": "https://www.collierschools.com/calendars",
-          "verifyNote": "2026-27 dates not yet extracted."
+          "teacherWorkdays": [
+            "2026-09-21",
+            "2026-10-12",
+            "2027-01-04",
+            "2027-03-19"
+          ],
+          "halfDays": [
+            "2026-08-26",
+            "2026-10-29",
+            "2027-02-02",
+            "2027-04-21",
+            "2027-05-21",
+            "2027-05-27"
+          ],
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1745514038/collierschoolscom/svcivnf4fwilduzivsnx/2026-2027AcademicCalendarEnglish.pdf",
+          "verifyNote": "Board-approved PDF. Graduation week 2027-05-17 to 05-21. District marks 2026-09-11 (Rosh Hashanah eve) no-activities-after-sundown; 2026-09-21 (Yom Kippur) is the PD day."
         },
         {
           "id": "martin-fl",
           "name": "Martin County School District",
           "chapterCity": "Stuart",
           "state": "FL",
-          "firstDay": null,
-          "lastDay": null,
-          "thanksgivingBreak": null,
-          "winterBreak": null,
-          "springBreak": null,
+          "firstDay": "2026-08-10",
+          "lastDay": "2027-05-26",
+          "thanksgivingBreak": "2026-11-23 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "teacherWorkdays": [],
-          "halfDays": [],
+          "teacherWorkdays": [
+            "2026-09-21",
+            "2027-01-04",
+            "2027-02-22",
+            "2027-03-29"
+          ],
+          "halfDays": [
+            "2026-09-16",
+            "2026-10-14",
+            "2027-04-21",
+            "2027-05-26"
+          ],
           "verify": true,
-          "source": "https://www.martinschools.org",
-          "verifyNote": "2026-27 dates not yet extracted."
+          "source": "https://www.martinschools.org/page/calendars",
+          "verifyNote": "From district board-approval announcement; 2027-03-29 is a possible emergency make-up day. Confirm against official calendar PDF when posted."
         },
         {
           "id": "posnack-ds",
@@ -935,7 +962,7 @@
           "halfDays": [],
           "verify": true,
           "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
-          "source": "https://www.yhs.org"
+          "source": "https://www.yeshivahs.org"
         },
         {
           "id": "donnaklein-ds",
@@ -957,7 +984,7 @@
           "source": "https://www.dkja.org"
         }
       ],
-      "coverage": "Broward, Palm Beach & Collier Counties, FL"
+      "coverage": "Broward, Palm Beach, Collier & Martin Counties, FL"
     },
     {
       "id": "great-midwest",
