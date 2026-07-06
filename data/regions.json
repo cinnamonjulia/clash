@@ -992,28 +992,416 @@
       "states": [
         "IL"
       ],
-      "status": "pending",
-      "hubs": [
-        "Chicago",
-        "Buffalo Grove",
-        "Deerfield",
-        "Evanston",
-        "Highland Park",
-        "Northbrook",
-        "Skokie",
-        "Wilmette",
-        "Vernon Hills",
-        "Naperville",
-        "Oak Park",
-        "Lombard",
-        "Flossmoor",
-        "Homewood",
-        "Champaign",
-        "Peoria",
-        "Springfield"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "cps-il",
+          "name": "Chicago Public Schools (District 299)",
+          "chapterCity": "Chicago",
+          "state": "IL",
+          "firstDay": "2026-08-24",
+          "lastDay": "2027-06-11",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-04",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.cps.edu/calendar/",
+          "verifyNote": "Board approved 2/26/26. Thanksgiving assumed Wed-Fri per CPS pattern; confirm winter-break end (Jan 1 vs Jan 4) + institute days on cps.edu. Semester 1 now ends AFTER winter break."
+        },
+        {
+          "id": "stevenson-125-il",
+          "name": "Adlai E. Stevenson High School District 125",
+          "chapterCity": "Buffalo Grove / Vernon Hills / Lincolnshire",
+          "state": "IL",
+          "firstDay": "2026-08-13",
+          "lastDay": "2027-05-26",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-05",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-05-28",
+          "teacherWorkdays": [
+            "2027-02-26",
+            "2027-03-19"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.d125.org/academics/2026-27-academic-calendar",
+          "verifyNote": "Freshmen/transfers start 8/12; all students 8/13. Emergency make-up days June 1-4, 7.",
+          "otherBreaks": [
+            {
+              "range": "2026-10-12 to 2026-10-12",
+              "label": "Indigenous Peoples Day \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "d113-il",
+          "name": "Township High School District 113 (Deerfield & Highland Park HS)",
+          "chapterCity": "Deerfield / Highland Park",
+          "state": "IL",
+          "firstDay": "2026-08-12",
+          "lastDay": "2027-05-28",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-18 to 2027-01-04",
+          "springBreak": "2027-03-22 to 2027-03-29",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2027-01-15",
+            "2027-04-05"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1762186896/dist113org/zjoj3vt0c3kkdkriwjbw/2026-27SchoolCalendarEnglish.pdf",
+          "verifyNote": "Board approved 8/5/25. Final exams Dec 15-17 / May 25-27; seniors' last day May 17.",
+          "otherBreaks": [
+            {
+              "range": "2026-09-21 to 2026-09-21",
+              "label": "Yom Kippur \u2014 no school"
+            },
+            {
+              "range": "2026-10-12 to 2026-10-12",
+              "label": "Indigenous Peoples Day \u2014 no school"
+            },
+            {
+              "range": "2026-11-03 to 2026-11-03",
+              "label": "Election Day \u2014 no school"
+            },
+            {
+              "range": "2026-11-11 to 2026-11-11",
+              "label": "Veterans Day \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            },
+            {
+              "range": "2027-03-01 to 2027-03-01",
+              "label": "Pulaski Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "glenbrook-225-il",
+          "name": "Glenbrook High School District 225",
+          "chapterCity": "Northbrook / Glenview",
+          "state": "IL",
+          "firstDay": "2026-08-13",
+          "lastDay": "2027-05-24",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-04",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-12-18",
+            "2027-03-09"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1760619312/glenbrook225org/f6ehugiwb3jh6jxb3gua/2026-27_Glenbrook_Calendar_At_A_Glance_District.pdf",
+          "verifyNote": "Approved 5/26/26. Final exams Dec 15-17 / May 20-24.",
+          "otherBreaks": [
+            {
+              "range": "2026-09-21 to 2026-09-21",
+              "label": "Yom Kippur \u2014 no school"
+            },
+            {
+              "range": "2026-11-03 to 2026-11-03",
+              "label": "Election Day \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "newtrier-203-il",
+          "name": "New Trier Township High School District 203",
+          "chapterCity": "Wilmette / Winnetka / Glencoe",
+          "state": "IL",
+          "firstDay": "2026-08-19",
+          "lastDay": "2027-06-04",
+          "thanksgivingBreak": "2026-11-23 to 2026-11-27",
+          "winterBreak": "2026-12-18 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-29",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-05-23",
+          "teacherWorkdays": [
+            "2026-11-13",
+            "2027-02-12",
+            "2027-04-26"
+          ],
+          "halfDays": [
+            "2026-08-19",
+            "2027-01-04",
+            "2027-06-04"
+          ],
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1763482860/newtrierk12ilus/newtrierk12ilus/c5oqhllov6behnzuxswl/SchoolYearCalendar2026-2027.pdf",
+          "verifyNote": "Mon 11/23-Tue 11/24 are remote parent conferences (students off) = full TG week. 12/18 & 3/29 are grading/no-school days often used as make-up days \u2014 district discourages travel. Graduation 5/23 at NOW Arena.",
+          "otherBreaks": [
+            {
+              "range": "2026-09-21 to 2026-09-21",
+              "label": "Yom Kippur \u2014 no school"
+            },
+            {
+              "range": "2026-11-03 to 2026-11-03",
+              "label": "Election Day \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "eths-202-il",
+          "name": "Evanston Township High School District 202",
+          "chapterCity": "Evanston",
+          "state": "IL",
+          "firstDay": "2026-08-17",
+          "lastDay": "2027-05-28",
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.eths202.org/calendar",
+          "verifyNote": "First/last day from board-approved calendar (April 2026 news reports); break dates not yet published \u2014 check eths202.org."
+        },
+        {
+          "id": "niles-219-il",
+          "name": "Niles Township High Schools District 219",
+          "chapterCity": "Skokie / Lincolnwood / Morton Grove",
+          "state": "IL",
+          "firstDay": "2026-08-11",
+          "lastDay": "2027-05-21",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-10-23",
+            "2027-03-12"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://www.niles219.org/d219-calendar",
+          "verifyNote": "Final exams (Capstone Week) Dec 16-18 / May 18-20; graduation dates TBD. Weekly Wednesday late-start days.",
+          "otherBreaks": [
+            {
+              "range": "2026-10-12 to 2026-10-12",
+              "label": "Indigenous Peoples Day \u2014 no school"
+            },
+            {
+              "range": "2026-11-03 to 2026-11-03",
+              "label": "Election Day \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "d214-il",
+          "name": "Township High School District 214",
+          "chapterCity": "Buffalo Grove / Arlington Heights",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.d214.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "oprf-200-il",
+          "name": "Oak Park & River Forest High School District 200",
+          "chapterCity": "Oak Park",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.oprfhs.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "glenbard-87-il",
+          "name": "Glenbard Township High School District 87",
+          "chapterCity": "Lombard / Glen Ellyn",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.glenbard87.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "naperville-203-il",
+          "name": "Naperville Community Unit School District 203",
+          "chapterCity": "Naperville",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.naperville203.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "hf-233-il",
+          "name": "Homewood-Flossmoor High School District 233",
+          "chapterCity": "Flossmoor / Homewood",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.hfhighschool.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "champaign-4-il",
+          "name": "Champaign Unit 4 School District",
+          "chapterCity": "Champaign",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.champaignschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "peoria-150-il",
+          "name": "Peoria Public Schools District 150",
+          "chapterCity": "Peoria",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.peoriapublicschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "springfield-186-il",
+          "name": "Springfield Public Schools District 186",
+          "chapterCity": "Springfield",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.sps186.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "idacrown-ds",
+          "name": "Ida Crown Jewish Academy",
+          "chapterCity": "Skokie",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.icja.org",
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "type": "dayschool"
+        },
+        {
+          "id": "rzjhs-ds",
+          "name": "Rochelle Zell Jewish High School",
+          "chapterCity": "Deerfield",
+          "state": "IL",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.rzjhs.org",
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "type": "dayschool"
+        }
       ],
-      "districts": [],
-      "coverage": "Chicago & suburbs"
+      "coverage": "Chicago, North Shore & suburbs + downstate IL"
     },
     {
       "id": "greater-atlanta",
