@@ -1,24 +1,31 @@
 # Clash (formerly CalendER)
 
-A planning tool for **BBYO Eastern Region** (NC / SC / VA): key school dates for the
-districts where ER has chapters, so events don't collide with school schedules.
+A planning tool for **BBYO**: key 2026–27 school dates for the districts where every
+region has chapters, so events don't collide with school schedules.
 
-## What's here so far
+Started with Eastern Region (NC / SC / VA) and now covers **all 36 BBYO regions &
+councils** pulled from bbyo.org.
 
-- **`MASTER-CALENDAR.md`** — human-readable master list of 2026–27 dates (start/end of
-  school, Thanksgiving, winter break, spring break). Read this first.
-- **`data/regions.json`** — the same data in structured form, ready for a future app to
-  read. Each district has its official source link and a `verify` flag for dates that
-  still need a check.
+## What's here
+
+- **`app/`** — the Clash web app (open `app/index.html`): region picker, calendar view,
+  and an "is this date clear?" conflict checker. Reads `app/data.js`, which is
+  auto-generated — run `python3 build.py` after editing the data.
+- **`data/regions.json`** — the single source of truth. Each district has its official
+  source link and a `verify` flag for dates that still need a check; Jewish day schools
+  are tagged `type: dayschool` (✡ badge in the app).
+- **`MASTER-CALENDAR.md`** — human-readable master list for Eastern Region (the original
+  step-1 dataset).
 
 ## Status
 
-**Step 1 (data gathering) — in progress.** 16 districts collected; a few rows still need
-verification and two districts (Charleston, Newport News) need their break dates filled.
+**All 36 regions populated** — 359 districts (122 fully verified from official
+calendars, 237 flagged ⚠️ for extraction or confirmation), including 47 Jewish day
+schools awaiting their 2026–27 calendars (most publish in late summer 2026).
 
 ## Next steps
 
-1. Verify the flagged dates against official district PDFs.
-2. Add graduation dates when districts publish them (usually spring 2027).
-3. Build a simple, shareable web app that reads `data/regions.json` — calendar view +
-   an "is this date clear?" event-conflict checker.
+1. Work down the ⚠️ flags: extract scaffolded hub districts from their source links and
+   confirm aggregator-sourced dates against official PDFs.
+2. Fill day-school calendars as they post (late summer 2026).
+3. Add graduation dates when districts publish them (usually spring 2027).
