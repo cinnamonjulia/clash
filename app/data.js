@@ -1845,7 +1845,7 @@ window.CALENDER_DATA = {
           "halfDays": [],
           "verify": true,
           "source": "https://www.shorewood.k12.wi.us/families-students/district-calendar",
-          "verifyNote": "2026-27 calendars are posted on the district page but dates not yet extracted \u2014 starts before Labor Day."
+          "verifyNote": "2026-27 calendar not yet posted (only 2025-26 PDF on site). Re-check in fall; beware same-named districts in IL/WA when searching."
         },
         {
           "id": "mps-wi",
@@ -1875,18 +1875,22 @@ window.CALENDER_DATA = {
           "name": "Mequon-Thiensville School District (Homestead HS)",
           "chapterCity": "Milwaukee (Mequon)",
           "state": "WI",
-          "firstDay": null,
-          "lastDay": null,
-          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "firstDay": "2026-09-01",
+          "lastDay": "2027-06-10",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
           "winterBreak": "2026-12-23 to 2027-01-01",
           "springBreak": "2027-03-22 to 2027-03-29",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "teacherWorkdays": [],
-          "halfDays": [],
-          "verify": true,
-          "source": "https://www.mtsd.k12.wi.us/district/calendar",
-          "verifyNote": "Winter/spring confirmed via news; first/last day not yet extracted from grade-level PDFs."
+          "teacherWorkdays": [
+            "2026-11-25",
+            "2026-11-30"
+          ],
+          "halfDays": [
+            "2027-06-10"
+          ],
+          "verify": false,
+          "source": "https://www.mtsd.k12.wi.us/district/calendar"
         },
         {
           "id": "mmsd-wi",
@@ -1921,7 +1925,45 @@ window.CALENDER_DATA = {
           "halfDays": [],
           "verify": true,
           "source": "https://www.aasd.k12.wi.us/district/district-information/calendars/yearly-calendars",
-          "verifyNote": "TG/winter dates from regional pattern \u2014 confirm against AASD PDF."
+          "verifyNote": "First/last day + spring break from aggregator of approved calendar (board approves in Dec). Thanksgiving/winter dates from regional pattern \u2014 confirm when AASD posts the PDF."
+        },
+        {
+          "id": "wits-ds",
+          "name": "Wisconsin Institute for Torah Study (boys HS)",
+          "chapterCity": "Milwaukee",
+          "state": "WI",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "source": "https://www.witsyeshiva.org"
+        },
+        {
+          "id": "tam-ds",
+          "name": "Torah Academy of Milwaukee (girls HS)",
+          "chapterCity": "Milwaukee",
+          "state": "WI",
+          "type": "dayschool",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "source": "https://www.tamilwaukee.org"
         }
       ],
       "coverage": "Wisconsin (Milwaukee & Madison)"
