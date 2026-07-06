@@ -3983,12 +3983,117 @@ window.CALENDER_DATA = {
         "KS",
         "MO"
       ],
-      "status": "pending",
-      "hubs": [
-        "Overland Park",
-        "Kansas City"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "bluevalley-ks",
+          "name": "Blue Valley School District (USD 229)",
+          "chapterCity": "Overland Park",
+          "state": "KS",
+          "firstDay": "2026-08-13",
+          "lastDay": "2027-05-25",
+          "thanksgivingBreak": "2026-11-23 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-04",
+          "springBreak": "2027-03-15 to 2027-03-19",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-09-08",
+            "2026-10-09",
+            "2026-10-23",
+            "2026-11-09",
+            "2027-02-12",
+            "2027-03-22",
+            "2027-04-19"
+          ],
+          "halfDays": [
+            "2026-12-18",
+            "2027-05-25"
+          ],
+          "verify": false,
+          "source": "https://www.bluevalleyk12.org/about/calendar",
+          "verifyNote": "HS finals w/ early release 12/16-18 and 5/21-25; seniors' last day 5/14, graduations tentatively 5/15-16. K-5-only collaboration days not listed (HS in session).",
+          "otherBreaks": [
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "shawneemission-ks",
+          "name": "Shawnee Mission School District",
+          "chapterCity": "Overland Park / Prairie Village",
+          "state": "KS",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.smsd.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "olathe-ks",
+          "name": "Olathe Public Schools",
+          "chapterCity": "Olathe",
+          "state": "KS",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.olatheschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "kcps-mo",
+          "name": "Kansas City Public Schools",
+          "chapterCity": "Kansas City, MO",
+          "state": "MO",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.kcpublicschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "hbha-ds",
+          "name": "Hyman Brand Hebrew Academy",
+          "chapterCity": "Overland Park",
+          "state": "KS",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.hbha.edu",
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "type": "dayschool"
+        }
       ],
-      "districts": [],
       "coverage": "Greater Kansas City"
     },
     {
@@ -3997,12 +4102,99 @@ window.CALENDER_DATA = {
       "states": [
         "MN"
       ],
-      "status": "pending",
-      "hubs": [
-        "Minneapolis",
-        "St. Paul"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "slp-mn",
+          "name": "St. Louis Park Public Schools",
+          "chapterCity": "St. Louis Park",
+          "state": "MN",
+          "firstDay": "2026-08-24",
+          "lastDay": null,
+          "thanksgivingBreak": "2026-11-23 to 2026-11-27",
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.slpschools.org/calendar",
+          "verifyNote": "First day 8/24/26 + full Thanksgiving week confirmed; winter/spring breaks not yet extracted from the district's interactive calendar."
+        },
+        {
+          "id": "hopkins-mn",
+          "name": "Hopkins Public Schools",
+          "chapterCity": "Hopkins / Minnetonka",
+          "state": "MN",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.hopkinsschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "minnetonka-mn",
+          "name": "Minnetonka Public Schools",
+          "chapterCity": "Minnetonka",
+          "state": "MN",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.minnetonkaschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "minneapolis-mn",
+          "name": "Minneapolis Public Schools",
+          "chapterCity": "Minneapolis",
+          "state": "MN",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.mpschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "stpaul-mn",
+          "name": "Saint Paul Public Schools",
+          "chapterCity": "St. Paul",
+          "state": "MN",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.spps.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        }
       ],
-      "districts": [],
       "coverage": "Minnesota (Twin Cities)"
     },
     {
@@ -4012,12 +4204,103 @@ window.CALENDER_DATA = {
         "NE",
         "IA"
       ],
-      "status": "pending",
-      "hubs": [
-        "Omaha",
-        "Sioux City"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "westside66-ne",
+          "name": "Westside Community Schools (District 66)",
+          "chapterCity": "Omaha",
+          "state": "NE",
+          "firstDay": "2026-08-13",
+          "lastDay": "2027-05-28",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-04",
+          "springBreak": "2027-03-29 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-05-16",
+          "teacherWorkdays": [
+            "2026-09-08",
+            "2026-10-12",
+            "2027-01-15",
+            "2027-02-12",
+            "2027-02-15",
+            "2027-04-26"
+          ],
+          "halfDays": [
+            "2026-12-18",
+            "2027-03-26",
+            "2027-05-26",
+            "2027-05-28"
+          ],
+          "verify": false,
+          "source": "https://www.westside66.org/district-calendar/student-calendars",
+          "verifyNote": "Board approved 10/21/24, revised 4/24/25. Last day 5/28 dismisses at noon.",
+          "otherBreaks": [
+            {
+              "range": "2026-10-08 to 2026-10-09",
+              "label": "Parent-teacher conferences \u2014 no school"
+            },
+            {
+              "range": "2027-03-18 to 2027-03-19",
+              "label": "Parent-teacher conferences \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "millard-ne",
+          "name": "Millard Public Schools",
+          "chapterCity": "Omaha / Millard",
+          "state": "NE",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.mpsomaha.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "ops-ne",
+          "name": "Omaha Public Schools",
+          "chapterCity": "Omaha",
+          "state": "NE",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://district.ops.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "siouxcity-ia",
+          "name": "Sioux City Community School District",
+          "chapterCity": "Sioux City",
+          "state": "IA",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.siouxcityschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        }
       ],
-      "districts": [],
       "coverage": "Greater Omaha & Sioux City"
     },
     {
@@ -4026,11 +4309,98 @@ window.CALENDER_DATA = {
       "states": [
         "MO"
       ],
-      "status": "pending",
-      "hubs": [
-        "St. Louis"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "ladue-mo",
+          "name": "Ladue School District",
+          "chapterCity": "Ladue / Creve Coeur",
+          "state": "MO",
+          "firstDay": "2026-08-24",
+          "lastDay": "2027-05-27",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-23 to 2027-01-01",
+          "springBreak": "2027-03-15 to 2027-03-19",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-11-03",
+            "2027-01-15",
+            "2027-02-12",
+            "2027-04-06"
+          ],
+          "halfDays": [
+            "2026-10-16",
+            "2026-10-22",
+            "2026-12-22",
+            "2027-03-05",
+            "2027-05-27"
+          ],
+          "verify": false,
+          "source": "https://www.ladueschools.net/calendars/2026-27",
+          "verifyNote": "Ladue Horton Watkins HS is the BBYO hub school. Last day 5/27 is early release.",
+          "otherBreaks": [
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "parkway-mo",
+          "name": "Parkway School District",
+          "chapterCity": "Chesterfield / West County",
+          "state": "MO",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.parkwayschools.net",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "clayton-mo",
+          "name": "School District of Clayton",
+          "chapterCity": "Clayton",
+          "state": "MO",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.claytonschools.net",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "rockwood-mo",
+          "name": "Rockwood School District",
+          "chapterCity": "Wildwood / Ballwin",
+          "state": "MO",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.rsdmo.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        }
       ],
-      "districts": [],
       "coverage": "St. Louis"
     },
     {
