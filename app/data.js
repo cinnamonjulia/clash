@@ -3560,15 +3560,198 @@ window.CALENDER_DATA = {
       "states": [
         "OH"
       ],
-      "status": "pending",
-      "hubs": [
-        "Cleveland",
-        "Akron",
-        "Canton",
-        "Youngstown",
-        "Toledo"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "beachwood-oh",
+          "name": "Beachwood City Schools",
+          "chapterCity": "Beachwood",
+          "state": "OH",
+          "firstDay": "2026-08-26",
+          "lastDay": "2027-06-08",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-26",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-11-02",
+            "2027-01-04",
+            "2027-02-12"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1753788936/beachwoodschoolsorg/fw22i19989esay7xakzj/2026-2027DistrictCalendar.pdf",
+          "verifyNote": "Board resolution 07-25-327.",
+          "otherBreaks": [
+            {
+              "range": "2026-09-21 to 2026-09-21",
+              "label": "Yom Kippur \u2014 no school"
+            },
+            {
+              "range": "2026-11-03 to 2026-11-03",
+              "label": "Parent-teacher conferences \u2014 no school"
+            },
+            {
+              "range": "2027-02-05 to 2027-02-05",
+              "label": "Lunar New Year \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Presidents Day \u2014 no school"
+            },
+            {
+              "range": "2027-03-10 to 2027-03-10",
+              "label": "Eid al-Fitr \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "shaker-oh",
+          "name": "Shaker Heights City School District",
+          "chapterCity": "Shaker Heights",
+          "state": "OH",
+          "firstDay": "2026-08-18",
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.shaker.org/calendar",
+          "verifyNote": "First day 8/18/26 confirmed (staggered start); full board-approved calendar PDF is behind BoardDocs \u2014 extract remaining dates from shaker.org."
+        },
+        {
+          "id": "solon-oh",
+          "name": "Solon City Schools",
+          "chapterCity": "Solon",
+          "state": "OH",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.solonschools.org/district-calendar",
+          "verifyNote": "2026-27 calendar approved; one-page summary lives in a Google Drive link on the district calendar page \u2014 dates not yet extracted."
+        },
+        {
+          "id": "orange-oh",
+          "name": "Orange City Schools",
+          "chapterCity": "Pepper Pike / Orange / Moreland Hills",
+          "state": "OH",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.orangeschools.org/57782",
+          "verifyNote": "2026-27 calendar not yet published (approved only through 2025-26 as of July 2026)."
+        },
+        {
+          "id": "akron-oh",
+          "name": "Akron Public Schools",
+          "chapterCity": "Akron",
+          "state": "OH",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.akronschools.com",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "jackson-oh",
+          "name": "Jackson Local School District",
+          "chapterCity": "Canton / Jackson Township",
+          "state": "OH",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.jackson.stark.k12.oh.us",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "boardman-oh",
+          "name": "Boardman Local Schools",
+          "chapterCity": "Youngstown / Boardman",
+          "state": "OH",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.boardmanschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "sylvania-oh",
+          "name": "Sylvania Schools",
+          "chapterCity": "Toledo / Sylvania",
+          "state": "OH",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.sylvaniaschools.org",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "fuchsmizrachi-ds",
+          "name": "Fuchs Mizrachi School",
+          "chapterCity": "Beachwood",
+          "state": "OH",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.fuchsmizrachi.org",
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "type": "dayschool"
+        }
       ],
-      "districts": [],
       "coverage": "Northern Ohio"
     },
     {
@@ -3624,12 +3807,119 @@ window.CALENDER_DATA = {
       "states": [
         "NJ"
       ],
-      "status": "pending",
-      "hubs": [
-        "Cherry Hill",
-        "Voorhees"
+      "status": "populated",
+      "districts": [
+        {
+          "id": "cherryhill-nj",
+          "name": "Cherry Hill Public Schools",
+          "chapterCity": "Cherry Hill",
+          "state": "NJ",
+          "firstDay": "2026-09-02",
+          "lastDay": "2027-06-17",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-25 to 2027-03-29",
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-10-23",
+            "2027-02-05",
+            "2027-03-10",
+            "2027-05-17",
+            "2027-05-28"
+          ],
+          "halfDays": [
+            "2026-11-25",
+            "2026-12-04",
+            "2026-12-23",
+            "2027-03-24",
+            "2027-04-21"
+          ],
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1753201105/cherryhillk12njus/vranehbfbswyiobdb3gp/2026-2027Calendar072225.pdf",
+          "verifyNote": "BOE approved 7/8/25. In-service days honor Lunar New Year (2/5), Eid al-Fitr (3/10), Eid al-Adha (5/17). Spring break is split: 3/25-3/29 + Passover 4/22-23.",
+          "otherBreaks": [
+            {
+              "range": "2026-09-21 to 2026-09-21",
+              "label": "Yom Kippur \u2014 schools closed"
+            },
+            {
+              "range": "2026-11-05 to 2026-11-06",
+              "label": "NJEA Convention \u2014 schools closed"
+            },
+            {
+              "range": "2027-04-22 to 2027-04-23",
+              "label": "Passover break \u2014 schools closed"
+            }
+          ]
+        },
+        {
+          "id": "eastern-nj",
+          "name": "Eastern Camden County Regional High School District",
+          "chapterCity": "Voorhees",
+          "state": "NJ",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": "2027-01-18",
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.eccrsd.us/calendar12",
+          "verifyNote": "2026-27 calendar only published as a live events calendar \u2014 dates not yet extracted."
+        },
+        {
+          "id": "lenape-nj",
+          "name": "Lenape Regional High School District",
+          "chapterCity": "Marlton / Medford / Shamong",
+          "state": "NJ",
+          "firstDay": "2026-08-31",
+          "lastDay": "2027-06-15",
+          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-03-26 to 2027-04-02",
+          "mlkDay": "2027-01-18",
+          "graduation": "2027-06-15",
+          "teacherWorkdays": [
+            "2026-10-12",
+            "2026-12-09",
+            "2027-02-12",
+            "2027-03-10"
+          ],
+          "halfDays": [
+            "2026-10-30",
+            "2026-11-25",
+            "2026-12-23",
+            "2027-01-22",
+            "2027-01-25",
+            "2027-06-09",
+            "2027-06-10",
+            "2027-06-11",
+            "2027-06-14",
+            "2027-06-15"
+          ],
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1763648514/lrhsdorg/mfgqhtwsoaaubdkxy2bv/2026-2027SchoolCalendarBOEApproved111925.pdf",
+          "verifyNote": "BOE approved 11/19/25. 2/12 and 3/10 double as weather make-up days; graduation 6/15 6 PM (subject to make-up days June 16-22).",
+          "otherBreaks": [
+            {
+              "range": "2026-09-04 to 2026-09-04",
+              "label": "District closed (Labor Day weekend)"
+            },
+            {
+              "range": "2026-09-21 to 2026-09-21",
+              "label": "Yom Kippur \u2014 schools closed"
+            },
+            {
+              "range": "2026-11-05 to 2026-11-06",
+              "label": "NJEA Convention \u2014 schools closed"
+            }
+          ]
+        }
       ],
-      "districts": [],
       "coverage": "Southern New Jersey (Cherry Hill to the Shore)"
     },
     {
