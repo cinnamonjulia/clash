@@ -485,10 +485,12 @@
         '<span class="st '+s.kind+'">'+s.label+'</span>';
       results.appendChild(el);
     });
-    const total=districts.length;
-    let verdict = great===total ? "🟢 <b>Great window</b> — it's a weekend; teens are home &amp; free."
-      : risky===total ? "🔴 <b>Risky</b> — school break/holiday; teens may be traveling."
-      : flex===total ? "🩵 <b>Teacher/half day</b> — teens are off school; nice chance (double-check for long-weekend trips)."
+    // Verdict is based only on districts whose dates are loaded — pending ones can't vote.
+    const dated=great+school+risky+flex;
+    let verdict = dated===0 ? "⏳ <b>No dates loaded yet</b> for this view."
+      : great===dated ? "🟢 <b>Great window</b> — it's a weekend; teens are home &amp; free."
+      : risky===dated ? "🔴 <b>Risky</b> — school break/holiday; teens may be traveling."
+      : flex===dated ? "🩵 <b>Teacher/half day</b> — teens are off school; nice chance (double-check for long-weekend trips)."
       : risky===0 ? "🟡 <b>School day</b> — good for evenings &amp; weekends, not daytime."
       : "🟠 <b>Mixed</b> — some districts on break (teens may be away).";
     summary.innerHTML = verdict+"<br><b>"+great+"</b> home · <b>"+school+"</b> in school · <b>"+risky+"</b> break/holiday"+(flex?" · <b>"+flex+"</b> teacher/half day":"")+(unk?" · "+unk+" pending":"");
@@ -566,19 +568,21 @@
     pops.forEach(r=>{
       let g=0,sc=0,rk=0;
       r.districts.forEach(d=>{ const k=statusOn(d,dt).kind; if(k==="great")g++; else if(k==="risky")rk++; else if(k==="school"||k==="flex")sc++; });
-      const total=r.districts.length;
+      // Pending districts don't vote — judge only the ones with loaded dates.
+      const dated=g+sc+rk;
       let cls,label;
-      if(g===total){ cls="great"; label="Weekend — teens home"; home.push(r.name); }
-      else if(rk===total){ cls="risky"; label="Break/holiday — may travel"; }
+      if(dated===0){ cls="unknown"; label="Dates pending"; }
+      else if(g===dated){ cls="great"; label="Weekend — teens home"; home.push(r.name); }
+      else if(rk===dated){ cls="risky"; label="Break/holiday — may travel"; }
       else if(rk===0){ cls="school"; label="School day (eves only)"; }
-      else { cls="risky"; label=rk+" on break · "+sc+" in school"; }
+      else { cls="risky"; label=rk+" on break · "+(g||sc)+(g?" home":" in school"); }
       const el=document.createElement("div"); el.className="result";
       el.innerHTML='<span class="nm">'+r.name+'</span><span class="st '+cls+'">'+label+'</span>';
       res.appendChild(el);
     });
     const pending=DATA.regions.length-pops.length;
     const head = home.length ? "🟢 <b>Teens home &amp; free:</b> "+home.join(", ")
-                             : "🟡 No region is a weekend/home window today — check each for evenings vs. travel.";
+                             : "🟡 No region is a weekend/home window on this date — check each for evenings vs. travel.";
     sum.innerHTML = head + "<br><b>"+home.length+"</b> of "+pops.length+" loaded regions are a teens-home window"+
       (pending?" · "+pending+" more still being gathered":"");
   }
