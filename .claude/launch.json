@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "clash",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "mkdir -p /private/tmp/clash-app && cp '/Users/juliacinnamon/Desktop/CalendER/app/index.html' '/Users/juliacinnamon/Desktop/CalendER/app/data.js' /private/tmp/clash-app/ 2>/dev/null; cd /private/tmp/clash-app && exec /usr/bin/python3 -m http.server \"$PORT\""
+      ],
+      "port": 4174,
+      "autoPort": true
+    }
+  ]
+}
