@@ -278,19 +278,42 @@
       ", "+mon.getFullYear();
   }
 
+  // Region's shared summer-camp window: day after the latest last day, through the day
+  // before the earliest first day (2026 starts projected onto 2027, since 2027-28
+  // calendars aren't published yet).
+  function campWindow(r){
+    const lasts=r.districts.filter(d=>d.lastDay).map(d=>toDate(d.lastDay));
+    const firsts=r.districts.filter(d=>d.firstDay).map(d=>toDate(d.firstDay));
+    if(!lasts.length||!firsts.length) return null;
+    const start=new Date(Math.max.apply(null,lasts)); start.setDate(start.getDate()+1);
+    const back=new Date(Math.min.apply(null,firsts));
+    const end=new Date(2027, back.getMonth(), back.getDate()); end.setDate(end.getDate()-1);
+    const weeks=Math.max(0, Math.round((end-start)/(7*864e5)));
+    return {start,end,weeks,n:lasts.length,total:r.districts.length};
+  }
+  const fmtDt = dt => MONTHS[dt.getMonth()]+" "+dt.getDate();
+
   function bestWeekendsCard(){
     return '<section class="card" id="bestwknd"><h2 id="bwtitle">Best dates — planner</h2>'+
       '<select id="bwmode" style="font:inherit;font-weight:600;font-size:14px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:#f2f2fb;color:var(--ink);margin:2px 0 4px;cursor:pointer;">'+
       '<option value="year">🎒 School year — best weekends (Sep–May)</option>'+
       '<option value="summer">☀️ Summer synergy — school\'s out (Jun–Aug)</option></select>'+
-      '<p class="h2sub" id="bwsub"></p><div class="bw-grid" id="bwgrid"></div>'+
-      '<button class="bwtoggle" id="bwtoggle"></button></section>';
+      '<p class="h2sub" id="bwsub"></p>'+
+      '<div class="filters" id="bwregions" style="display:none;margin:4px 0 2px;"></div>'+
+      '<div class="bw-grid" id="bwgrid"></div>'+
+      '<button class="bwtoggle" id="bwtoggle"></button>'+
+      '<div id="bwwindows" style="display:none;"><h2 style="font-size:16px;margin:20px 0 2px;">Camp windows by region</h2>'+
+      '<p class="h2sub" id="bwwinsub"></p><div class="result-grid" id="bwwingrid"></div></div></section>';
   }
-  function renderBestWeekends(districts){
+  function renderBestWeekends(districts, summerRegions){
     const grid=document.getElementById("bwgrid"), sub=document.getElementById("bwsub"),
       tog=document.getElementById("bwtoggle"), modeSel=document.getElementById("bwmode"),
-      title=document.getElementById("bwtitle");
+      title=document.getElementById("bwtitle"), regBar=document.getElementById("bwregions"),
+      winBox=document.getElementById("bwwindows"), winGrid=document.getElementById("bwwingrid"),
+      winSub=document.getElementById("bwwinsub");
     let mode="year", showAll=false;
+    const selected=new Set(); // empty = all regions
+    summerRegions = summerRegions||[];
 
     function jump(dt){
       const target=document.querySelector("#view input[type=date]");
@@ -307,6 +330,7 @@
 
     function paintYear(){
       title.textContent="Best weekends — Sep to May";
+      regBar.style.display="none"; winBox.style.display="none";
       const withData=districts.filter(hasCoreDates).length;
       if(!withData){
         sub.textContent="No districts in this view have full break dates loaded yet — rankings will appear once they're gathered.";
@@ -334,18 +358,50 @@
       tog.textContent = showAll ? "Show top 10 only" : "Show all "+scored.length+" weekends (Sep–May)";
     }
 
+    function paintRegionChips(){
+      if(summerRegions.length<2){ regBar.style.display="none"; return; }
+      regBar.style.display=""; regBar.innerHTML="";
+      const mk=(label,active,fn)=>{ const b=document.createElement("button"); b.textContent=label;
+        if(active) b.classList.add("active"); b.addEventListener("click",fn); regBar.appendChild(b); };
+      mk("All regions", selected.size===0, ()=>{ selected.clear(); paint(); });
+      summerRegions.forEach(r=>mk(r.name.replace(/ Region$/,""), selected.has(r.id), ()=>{
+        selected.has(r.id) ? selected.delete(r.id) : selected.add(r.id); paint(); }));
+    }
+    function paintWindows(regions){
+      winBox.style.display=""; winGrid.innerHTML="";
+      winSub.textContent="Each region's shared out-of-session range for summer 2027 camps & trips — from the day after "+
+        "its latest last day. End dates are projected (≈) from 2026 start dates; 2027-28 calendars aren't out yet.";
+      const rows=regions.map(r=>({r,w:campWindow(r)})).sort((a,b)=>
+        !a.w ? 1 : !b.w ? -1 : a.w.start-b.w.start);
+      rows.forEach(({r,w})=>{
+        const el=document.createElement("div"); el.className="result";
+        if(!w){ el.innerHTML='<span class="nm">'+r.name+'</span><span class="st unknown">Dates pending</span>'; }
+        else {
+          const cls = w.weeks>=9?"great":w.weeks>=7?"flex":w.weeks>=5?"school":"risky";
+          el.innerHTML='<span><span class="nm">'+r.name+'</span><br><span class="rg">'+
+            w.n+" of "+w.total+" districts dated</span></span>"+
+            '<span class="st '+cls+'">'+fmtDt(w.start)+" → ≈"+fmtDt(w.end)+" · ~"+w.weeks+" wks</span>";
+        }
+        winGrid.appendChild(el);
+      });
+    }
     function paintSummer(){
       title.textContent="Summer synergy — school's out";
-      const withData=districts.filter(d=>d.firstDay&&d.lastDay).length;
+      paintRegionChips();
+      const activeRegions = summerRegions.length
+        ? (selected.size ? summerRegions.filter(r=>selected.has(r.id)) : summerRegions) : [];
+      const pool = activeRegions.length ? activeRegions.reduce((a,r)=>a.concat(r.districts),[]) : districts;
+      const withData=pool.filter(d=>d.firstDay&&d.lastDay).length;
       if(!withData){
         sub.textContent="No districts in this view have first/last days loaded yet — the summer window will appear once they're gathered.";
-        grid.innerHTML=""; tog.style.display="none"; return;
+        grid.innerHTML=""; tog.style.display="none"; winBox.style.display="none"; return;
       }
       tog.style.display="";
-      const scored=summerMondays().map(m=>scoreSummerWeek(districts,m)).filter(w=>w.total>0);
+      const scored=summerMondays().map(m=>scoreSummerWeek(pool,m)).filter(w=>w.total>0);
+      const scopeLabel = selected.size ? selected.size+" selected region"+(selected.size>1?"s":"") : "all regions in view";
       sub.textContent="Full weeks (Mon–Sun) ranked by how many districts are completely out of session — the shared "+
-        "window for summer programs, trips & internships. ✡ = Shavuot week. Based on "+withData+" of "+
-        districts.length+" districts with first/last days. Tap a week to load its Monday in the checker.";
+        "window for summer programs, trips & internships. ✡ = Shavuot week. Scoring "+scopeLabel+": "+withData+" of "+
+        pool.length+" districts with first/last days. Tap a week to load its Monday in the checker.";
       const ranked=scored.slice().sort((a,b)=>
         (b.fullOut/b.total)-(a.fullOut/a.total) || (a.chag?1:0)-(b.chag?1:0) || a.mon-b.mon);
       grid.innerHTML="";
@@ -359,6 +415,7 @@
         chip(pct===1&&!w.chag?" perfect":"", showAll?"":"#"+(i+1), fmtWeek(w.mon), tags, meta, w.mon);
       });
       tog.textContent = showAll ? "Show top 10 only" : "Show all "+scored.length+" summer weeks";
+      if(activeRegions.length) paintWindows(activeRegions); else winBox.style.display="none";
     }
 
     function paint(){ mode==="year" ? paintYear() : paintSummer(); }
@@ -447,7 +504,7 @@
       '<span><span class="dot" style="background:var(--wknd)"></span> Teacher/half day</span>'+
       '<span><span class="dot" style="background:var(--in)"></span> Break/holiday — may travel</span></div></section>'+
       '<section class="card"><h2>Regions</h2><p class="h2sub">Pick a region to see its schools by district. ✓ = dates loaded · ⏳ = being gathered.</p><div class="rgrid" id="rgrid"></div></section>';
-    renderBestWeekends(allDistricts());
+    renderBestWeekends(allDistricts(), pops);
     const input=view.querySelector("#ordersum").closest("section").querySelector("input[type=date]");
     input.addEventListener("input",()=>renderOrderResults(input.value,pops));
     renderOrderResults(input.value,pops);
@@ -506,7 +563,7 @@
       + checkerCard("Is this date clear? — "+r.name,
       "Checks your date across "+r.name+"'s "+r.districts.length+" districts ("+statesLine+").")
       + '<div class="filters" id="filters"></div><div id="districts"></div>';
-    renderBestWeekends(r.districts);
+    renderBestWeekends(r.districts, [r]);
     const host=view.querySelector(".summary").closest("section");
     host.querySelector("input").addEventListener("input",()=>renderChecker(host,r.districts,false));
     renderChecker(host,r.districts,false);
