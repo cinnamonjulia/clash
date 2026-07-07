@@ -113,7 +113,8 @@
      radial-gradient(1100px 520px at 50% -12%, rgba(255,255,255,.12), transparent 60%),
      var(--bg); background-attachment:fixed; }
   /* text that sits directly on the blue backdrop */
-  header .sub, .picker label, footer { color:#cfd2ff; }
+  header .sub, header .credit, .picker label, footer { color:#cfd2ff; }
+  header .credit { font-size:12.5px; margin:6px 0 0; opacity:.85; }
   footer .warn, footer { opacity:.95; }
   .card { box-shadow:0 12px 34px rgba(5,2,45,.32); }
   input[type=date], .result { background:#f2f2fb; }
@@ -128,6 +129,7 @@
   <header>
     <h1>Clash</h1>
     <p class="sub">Spot the clash before you book it — BBYO school dates across the Order.</p>
+    <p class="credit">This tool was built by the 2026 ILTC Team based on a suggestion from Zachary Tabachnikoff.</p>
   </header>
 
   <div class="picker">
