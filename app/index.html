@@ -49,6 +49,19 @@
   .st.great{color:var(--off);background:var(--off-bg);} .st.school{color:var(--warn);background:var(--warn-bg);}
   .st.risky{color:var(--in);background:var(--in-bg);} .st.flex{color:var(--wknd);background:var(--wknd-bg);}
   .st.unknown{color:var(--ink-soft);background:var(--line);}
+  /* best weekends strip */
+  .bw-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:10px; margin-top:14px; }
+  .bw { font:inherit; text-align:left; cursor:pointer; border:1px solid var(--line); background:#f2f2fb;
+    border-radius:14px; padding:11px 13px; display:flex; flex-direction:column; gap:4px; color:var(--ink); }
+  .bw:hover { border-color:var(--brand); box-shadow:0 4px 14px rgba(248,249,10,.25); }
+  .bw .bw-date { font-weight:700; font-size:15px; }
+  .bw .bw-rank { color:var(--ink-soft); font-weight:600; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
+  .bw .bw-meta { font-size:12px; color:var(--ink-soft); }
+  .bw .bw-tags { display:flex; gap:6px; flex-wrap:wrap; }
+  .bw.perfect { border-color:var(--off); }
+  .bwtoggle { font:inherit; font-size:12.5px; font-weight:600; cursor:pointer; margin-top:12px; padding:7px 14px;
+    border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--ink-soft); }
+  .bwtoggle:hover { border-color:var(--brand); }
   .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:12px; }
   .legend span { display:inline-flex; align-items:center; gap:5px; } .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
   /* region overview grid */
@@ -142,8 +155,12 @@
     return da.getMonth()===db.getMonth() ? MONTHS[da.getMonth()]+" "+da.getDate()+"–"+db.getDate()
       : MONTHS[da.getMonth()]+" "+da.getDate()+" – "+MONTHS[db.getMonth()]+" "+db.getDate(); }
   function inRange(dt,r){ if(!r) return false; const [a,b]=r.split(" to "); return dt>=toDate(a)&&dt<=toDate(b); }
+  // National holidays every district takes off (rarely in the data since schools are
+  // closed anyway) — treated like MLK: the adjacent weekend is a family-travel risk.
+  const NATIONAL_HOLIDAYS = {"2026-09-07":"Labor Day (may travel)","2027-05-31":"Memorial Day (may travel)"};
   // Is this date a multi-day break / holiday closure (not a weekend)? Returns a label or null.
   function breakLabel(d,dt){
+    if(NATIONAL_HOLIDAYS[isoOf(dt)]) return NATIONAL_HOLIDAYS[isoOf(dt)];
     if(d.firstDay&&d.lastDay&&(dt<toDate(d.firstDay)||dt>toDate(d.lastDay))) return "Summer break";
     if(inRange(dt,d.fallBreak)) return "Fall break";
     if(inRange(dt,d.midwinterBreak)) return "Mid-winter break";
@@ -173,6 +190,105 @@
       return {kind:"great",label:"Weekend — free"};
     }
     return {kind:"school",label:"School day"};
+  }
+
+  // ---- best weekends (Sep–May) ----
+  // Jewish holidays 2026-27 that land on (or bleed into) weekends. Schools don't flag
+  // these when they fall on a Sat/Sun, but no BBYO region can program them.
+  const CHAGIM = {
+    "2026-09-12":"Rosh Hashanah","2026-09-13":"Rosh Hashanah",
+    "2026-09-20":"Erev Yom Kippur","2026-09-21":"Yom Kippur",
+    "2026-09-26":"Sukkot","2026-09-27":"Sukkot",
+    "2026-10-03":"Shemini Atzeret","2026-10-04":"Simchat Torah",
+    "2027-04-22":"Passover","2027-04-23":"Passover",
+    "2027-04-24":"Passover (chol hamoed)","2027-04-25":"Passover (chol hamoed)",
+    "2027-04-28":"Passover","2027-04-29":"Passover"
+  };
+  // Every Saturday from Sep 2026 through May 2027.
+  function sepMaySaturdays(){
+    const out=[], end=new Date(2027,4,31), d=new Date(2026,8,1);
+    while(d.getDay()!==6) d.setDate(d.getDate()+1);
+    for(; d<=end; d.setDate(d.getDate()+7)) out.push(new Date(d));
+    return out;
+  }
+  // Only rank districts whose break data is actually loaded — a scaffold with just a
+  // first day would otherwise look free every weekend of the year.
+  const hasCoreDates = d => !!(d.firstDay&&d.lastDay&&d.winterBreak&&d.springBreak);
+  // Score one weekend across districts: free = Sat+Sun both "great" (home, no travel risk),
+  // long3 = free AND Fri or Mon is a teacher workday (3-day weekend — overnight gold).
+  function scoreWeekend(districts, sat){
+    const sun=new Date(sat); sun.setDate(sat.getDate()+1);
+    const fri=new Date(sat); fri.setDate(sat.getDate()-1);
+    const mon=new Date(sat); mon.setDate(sat.getDate()+2);
+    const fIso=isoOf(fri), mIso=isoOf(mon);
+    let free=0,busy=0,unk=0,long3=0;
+    districts.forEach(d=>{
+      if(!hasCoreDates(d)){ unk++; return; }
+      const a=statusOn(d,sat).kind, b=statusOn(d,sun).kind;
+      if(a==="unknown"||b==="unknown"){ unk++; return; }
+      if(a==="great"&&b==="great"){
+        free++;
+        const tw=d.teacherWorkdays||[];
+        if(tw.indexOf(fIso)>=0||tw.indexOf(mIso)>=0) long3++;
+      } else busy++;
+    });
+    const chag = CHAGIM[isoOf(sat)] || CHAGIM[isoOf(sun)] || null;
+    return {sat,free,busy,unk,long3,chag,total:free+busy};
+  }
+  function fmtWknd(sat){
+    const sun=new Date(sat); sun.setDate(sat.getDate()+1);
+    return sat.getMonth()===sun.getMonth()
+      ? MONTHS[sat.getMonth()]+" "+sat.getDate()+"–"+sun.getDate()
+      : MONTHS[sat.getMonth()]+" "+sat.getDate()+" – "+MONTHS[sun.getMonth()]+" "+sun.getDate();
+  }
+  function bestWeekendsCard(){
+    return '<section class="card" id="bestwknd"><h2>Best weekends — Sep to May</h2>'+
+      '<p class="h2sub" id="bwsub"></p><div class="bw-grid" id="bwgrid"></div>'+
+      '<button class="bwtoggle" id="bwtoggle"></button></section>';
+  }
+  function renderBestWeekends(districts){
+    const withData=districts.filter(hasCoreDates).length;
+    const grid=document.getElementById("bwgrid"), sub=document.getElementById("bwsub"), tog=document.getElementById("bwtoggle");
+    if(!withData){
+      sub.textContent="No districts in this view have full break dates loaded yet — rankings will appear once they're gathered.";
+      tog.style.display="none"; return;
+    }
+    const scored=sepMaySaturdays().map(s=>scoreWeekend(districts,s)).filter(w=>w.total>0);
+    let showAll=false;
+    sub.textContent="Weekends where teens are home, in school Fri & Mon (no break travel), ranked. "+
+      "✦ = 3-day weekend (teacher workday) — prime for overnights · ✡ = Jewish holiday, no programming. "+
+      "Based on "+withData+" of "+districts.length+" districts with full dates. Tap a weekend to load it in the checker.";
+    const pctOf = w => w.chag ? -1 : w.free/w.total; // chag weekends sink to the bottom
+    const ranked=scored.slice().sort((a,b)=> pctOf(b)-pctOf(a) || b.long3-a.long3 || a.sat-b.sat);
+    function paint(){
+      grid.innerHTML="";
+      const list = showAll ? scored : ranked.slice(0,10);
+      list.forEach((w,i)=>{
+        const pct=w.free/w.total;
+        const el=document.createElement("button"); el.className="bw"+(pct===1&&!w.chag?" perfect":"");
+        const rank = showAll ? "" : '<span class="bw-rank">#'+(i+1)+'</span>';
+        let tags;
+        if(w.chag){
+          tags='<span class="st risky">✡ '+w.chag+'</span>';
+        } else {
+          tags='<span class="st '+(pct===1?"great":pct>=0.8?"flex":pct>=0.5?"school":"risky")+'">'+
+            w.free+"/"+w.total+" free</span>";
+          if(w.long3>0) tags+='<span class="st flex">✦ 3-day for '+w.long3+'</span>';
+        }
+        el.innerHTML=rank+'<span class="bw-date">'+fmtWknd(w.sat)+'</span>'+
+          '<span class="bw-tags">'+tags+'</span>'+
+          (w.chag?'<span class="bw-meta">Jewish holiday — no programming</span>'
+            : w.busy>0?'<span class="bw-meta">'+w.busy+' on break / traveling</span>':'<span class="bw-meta">All clear</span>');
+        el.addEventListener("click",()=>{
+          const target=document.querySelector("#view input[type=date]");
+          if(target){ target.value=isoOf(w.sat); target.dispatchEvent(new Event("input")); target.scrollIntoView({behavior:"smooth",block:"center"}); }
+        });
+        grid.appendChild(el);
+      });
+      tog.textContent = showAll ? "Show top 10 only" : "Show all "+scored.length+" weekends (Sep–May)";
+    }
+    tog.addEventListener("click",()=>{ showAll=!showAll; paint(); });
+    paint();
   }
 
   // collect all districts from populated regions, tagged with region name
@@ -245,7 +361,7 @@
   function renderOrder(){
     const view=document.getElementById("view");
     const pops=DATA.regions.filter(r=>r.status==="populated");
-    view.innerHTML =
+    view.innerHTML = bestWeekendsCard() +
       '<section class="card"><h2>Is this date clear? — Entire Order</h2>'+
       '<p class="h2sub">Which regions are a good programming window. 🟢 weekend = teens home &amp; free · 🟡 school day = evenings only · 🔴 break/holiday = teens may be traveling. '+pops.length+' of '+DATA.regions.length+' regions loaded so far.</p>'+
       '<input type="date" min="2026-07-01" max="2027-08-31" value="'+DEFAULT_DATE+'">'+
@@ -255,7 +371,8 @@
       '<span><span class="dot" style="background:var(--wknd)"></span> Teacher/half day</span>'+
       '<span><span class="dot" style="background:var(--in)"></span> Break/holiday — may travel</span></div></section>'+
       '<section class="card"><h2>Regions</h2><p class="h2sub">Pick a region to see its schools by district. ✓ = dates loaded · ⏳ = being gathered.</p><div class="rgrid" id="rgrid"></div></section>';
-    const input=view.querySelector("input");
+    renderBestWeekends(allDistricts());
+    const input=view.querySelector("#ordersum").closest("section").querySelector("input[type=date]");
     input.addEventListener("input",()=>renderOrderResults(input.value,pops));
     renderOrderResults(input.value,pops);
     const grid=document.getElementById("rgrid");
@@ -309,10 +426,12 @@
       return;
     }
     stateFilter="ALL";
-    view.innerHTML = checkerCard("Is this date clear? — "+r.name,
+    view.innerHTML = bestWeekendsCard()
+      + checkerCard("Is this date clear? — "+r.name,
       "Checks your date across "+r.name+"'s "+r.districts.length+" districts ("+statesLine+").")
       + '<div class="filters" id="filters"></div><div id="districts"></div>';
-    const host=view.querySelector(".card");
+    renderBestWeekends(r.districts);
+    const host=view.querySelector(".summary").closest("section");
     host.querySelector("input").addEventListener("input",()=>renderChecker(host,r.districts,false));
     renderChecker(host,r.districts,false);
     // filters
