@@ -62,6 +62,11 @@
   .bwtoggle { font:inherit; font-size:12.5px; font-weight:600; cursor:pointer; margin-top:12px; padding:7px 14px;
     border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--ink-soft); }
   .bwtoggle:hover { border-color:var(--brand); }
+  .verdict { margin:10px 0 4px; font-size:14px; padding:11px 13px; border-radius:12px; font-weight:500; }
+  .verdict b { font-weight:700; }
+  .verdict.great { background:var(--off-bg); color:var(--off); }
+  .verdict.warn { background:var(--warn-bg); color:var(--warn); }
+  .verdict.bad { background:var(--in-bg); color:var(--in); }
   .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink-soft); margin-top:12px; }
   .legend span { display:inline-flex; align-items:center; gap:5px; } .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
   /* region overview grid */
@@ -293,6 +298,13 @@
   }
   const fmtDt = dt => MONTHS[dt.getMonth()]+" "+dt.getDate();
 
+  // CRW leads every region list; everyone else follows alphabetically.
+  const CRW_ID="central-region-west";
+  function regionOrder(list){
+    return list.slice().sort((a,b)=>
+      (a.id===CRW_ID?-1:0)-(b.id===CRW_ID?-1:0) || a.name.localeCompare(b.name));
+  }
+
   function bestWeekendsCard(){
     return '<section class="card" id="bestwknd"><h2 id="bwtitle">Best dates — planner</h2>'+
       '<select id="bwmode" style="font:inherit;font-weight:600;font-size:14px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:#f2f2fb;color:var(--ink);margin:2px 0 4px;cursor:pointer;">'+
@@ -303,7 +315,8 @@
       '<div class="bw-grid" id="bwgrid"></div>'+
       '<button class="bwtoggle" id="bwtoggle"></button>'+
       '<div id="bwwindows" style="display:none;"><h2 style="font-size:16px;margin:20px 0 2px;">Camp windows by region</h2>'+
-      '<p class="h2sub" id="bwwinsub"></p><div class="result-grid" id="bwwingrid"></div></div></section>';
+      '<p class="h2sub" id="bwwinsub"></p><div id="bwverdict" class="verdict" style="display:none;"></div>'+
+      '<div class="result-grid" id="bwwingrid"></div></div></section>';
   }
   function renderBestWeekends(districts, summerRegions){
     const grid=document.getElementById("bwgrid"), sub=document.getElementById("bwsub"),
@@ -364,22 +377,44 @@
       const mk=(label,active,fn)=>{ const b=document.createElement("button"); b.textContent=label;
         if(active) b.classList.add("active"); b.addEventListener("click",fn); regBar.appendChild(b); };
       mk("All regions", selected.size===0, ()=>{ selected.clear(); paint(); });
-      summerRegions.forEach(r=>mk(r.name.replace(/ Region$/,""), selected.has(r.id), ()=>{
+      regionOrder(summerRegions).forEach(r=>mk(r.name.replace(/ Region$/,""), selected.has(r.id), ()=>{
         selected.has(r.id) ? selected.delete(r.id) : selected.add(r.id); paint(); }));
     }
-    function paintWindows(regions){
+    function paintWindows(regions, isSelection){
+      const verdict=document.getElementById("bwverdict");
       winBox.style.display=""; winGrid.innerHTML="";
       winSub.textContent="Each region's shared out-of-session range for summer 2027 camps & trips — from the day after "+
         "its latest last day. End dates are projected (≈) from 2026 start dates; 2027-28 calendars aren't out yet.";
       const rows=regions.map(r=>({r,w:campWindow(r)})).sort((a,b)=>
         !a.w ? 1 : !b.w ? -1 : a.w.start-b.w.start);
+      // Combined verdict: intersection of the selected regions' windows.
+      const wins=rows.filter(x=>x.w);
+      let comboStart=null, comboEnd=null, starter=null, ender=null;
+      if(wins.length){
+        wins.forEach(({r,w})=>{
+          if(!comboStart||w.start>comboStart){ comboStart=w.start; starter=r.name; }
+          if(!comboEnd||w.end<comboEnd){ comboEnd=w.end; ender=r.name; }
+        });
+        const days=Math.round((comboEnd-comboStart)/864e5)+1, weeks=Math.floor(days/7);
+        const who=(isSelection?"Your "+wins.length+" selected region"+(wins.length>1?"s":""):"All "+wins.length+" dated regions");
+        const range=fmtDt(comboStart)+" → ≈"+fmtDt(comboEnd);
+        let cls,msg;
+        if(days<7){ cls="bad"; msg="🔴 <b>No real shared summer window</b> — "+who+" only overlap "+(days<1?0:days)+" day"+(days===1?"":"s")+". "; }
+        else if(weeks>=6){ cls="great"; msg="🟢 <b>Works for summer camp</b> — "+who+" share <b>"+range+"</b> (~"+weeks+" weeks): room for full sessions. "; }
+        else if(weeks>=3){ cls="great"; msg="🟢 <b>Works</b> — "+who+" share <b>"+range+"</b> (~"+weeks+" weeks): enough for a session, but the edges are tight. "; }
+        else { cls="warn"; msg="🟠 <b>Tight</b> — "+who+" only share <b>"+range+"</b> (~"+weeks+" week"+(weeks===1?"":"s")+"): short-camp territory. "; }
+        if(wins.length>1) msg+="Last out: <b>"+starter+"</b> · first back: <b>≈"+ender+"</b>.";
+        verdict.className="verdict "+cls; verdict.style.display=""; verdict.innerHTML=msg;
+      } else { verdict.style.display="none"; }
       rows.forEach(({r,w})=>{
         const el=document.createElement("div"); el.className="result";
         if(!w){ el.innerHTML='<span class="nm">'+r.name+'</span><span class="st unknown">Dates pending</span>'; }
         else {
           const cls = w.weeks>=9?"great":w.weeks>=7?"flex":w.weeks>=5?"school":"risky";
-          el.innerHTML='<span><span class="nm">'+r.name+'</span><br><span class="rg">'+
-            w.n+" of "+w.total+" districts dated</span></span>"+
+          let note=w.n+" of "+w.total+" districts dated";
+          if(wins.length>1&&w.start.getTime()===comboStart.getTime()) note+=" · ⏳ sets the start";
+          if(wins.length>1&&w.end.getTime()===comboEnd.getTime()) note+=" · 🏁 first back";
+          el.innerHTML='<span><span class="nm">'+r.name+'</span><br><span class="rg">'+note+"</span></span>"+
             '<span class="st '+cls+'">'+fmtDt(w.start)+" → ≈"+fmtDt(w.end)+" · ~"+w.weeks+" wks</span>";
         }
         winGrid.appendChild(el);
@@ -415,7 +450,7 @@
         chip(pct===1&&!w.chag?" perfect":"", showAll?"":"#"+(i+1), fmtWeek(w.mon), tags, meta, w.mon);
       });
       tog.textContent = showAll ? "Show top 10 only" : "Show all "+scored.length+" summer weeks";
-      if(activeRegions.length) paintWindows(activeRegions); else winBox.style.display="none";
+      if(activeRegions.length) paintWindows(activeRegions, selected.size>0); else winBox.style.display="none";
     }
 
     function paint(){ mode==="year" ? paintYear() : paintSummer(); }
@@ -509,7 +544,7 @@
     input.addEventListener("input",()=>renderOrderResults(input.value,pops));
     renderOrderResults(input.value,pops);
     const grid=document.getElementById("rgrid");
-    DATA.regions.slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(r=>{
+    regionOrder(DATA.regions).forEach(r=>{
       const b=document.createElement("button"); b.className="rcard";
       const ok=r.status==="populated";
       b.innerHTML='<div class="rn">'+r.name+'</div><div class="rs">'+
@@ -599,7 +634,7 @@
   }
   // build dropdown
   const sel=document.getElementById("region");
-  const AZ=DATA.regions.slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const AZ=regionOrder(DATA.regions);
   sel.innerHTML='<option value="order">🇺🇸 Entire Order (all BBYO)</option>'+
     AZ.map(r=>'<option value="'+r.id+'">'+r.name+(r.status==="populated"?" ✓":"")+'</option>').join("");
   sel.addEventListener("change",e=>go(e.target.value));
