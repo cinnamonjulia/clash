@@ -5015,17 +5015,50 @@
           "chapterCity": "Syosset",
           "state": "NY",
           "firstDay": "2026-09-01",
-          "lastDay": null,
-          "thanksgivingBreak": null,
-          "winterBreak": null,
-          "springBreak": null,
+          "lastDay": "2027-06-25",
+          "thanksgivingBreak": "2026-11-25 to 2026-11-27",
+          "winterBreak": "2026-12-24 to 2027-01-01",
+          "springBreak": "2027-04-22 to 2027-04-30",
           "mlkDay": "2027-01-18",
           "graduation": null,
-          "teacherWorkdays": [],
+          "teacherWorkdays": [
+            "2026-11-03"
+          ],
           "halfDays": [],
-          "verify": true,
-          "source": "https://www.syossetschools.org/calendar",
-          "verifyNote": "First day 9/1/26 confirmed; district planning-calendar PDF is graphical only \u2014 extract remaining dates from syossetschools.org."
+          "verify": false,
+          "source": "https://resources.finalsite.net/images/v1763478382/syossetk12nyus/syossetk12nyus/qoxn4hgstl9bmnha0yzf/2026-2027_District_Planning_Calendar.pdf",
+          "verifyNote": "Official district planning calendar. Pre-Labor Day start (9/1) is real \u2014 Labor Day falls late in 2026. Spring recess 4/22-30 aligns with Passover. 5/28 is a snow make-up day (closed only if unused).",
+          "midwinterBreak": "2027-02-15 to 2027-02-19",
+          "otherBreaks": [
+            {
+              "range": "2026-09-21 to 2026-09-21",
+              "label": "Yom Kippur \u2014 district closed"
+            },
+            {
+              "range": "2026-10-12 to 2026-10-12",
+              "label": "Columbus Day \u2014 district closed"
+            },
+            {
+              "range": "2026-11-11 to 2026-11-11",
+              "label": "Veterans Day \u2014 district closed"
+            },
+            {
+              "range": "2027-03-09 to 2027-03-09",
+              "label": "Eid al-Fitr \u2014 district closed"
+            },
+            {
+              "range": "2027-03-25 to 2027-03-26",
+              "label": "Easter break \u2014 district closed"
+            },
+            {
+              "range": "2027-05-17 to 2027-05-17",
+              "label": "Eid al-Adha \u2014 district closed"
+            },
+            {
+              "range": "2027-06-18 to 2027-06-18",
+              "label": "Juneteenth \u2014 district closed"
+            }
+          ]
         },
         {
           "id": "jericho-ny",
@@ -5034,45 +5067,41 @@
           "state": "NY",
           "firstDay": "2026-08-31",
           "lastDay": "2027-06-25",
-          "thanksgivingBreak": "2026-11-26 to 2026-11-27",
+          "thanksgivingBreak": null,
           "winterBreak": "2026-12-24 to 2027-01-01",
-          "springBreak": "2027-04-19 to 2027-04-23",
+          "springBreak": null,
           "mlkDay": "2027-01-18",
           "graduation": null,
           "teacherWorkdays": [],
           "halfDays": [],
           "verify": true,
           "source": "https://www.jerichoschools.org/calendar-nav-main",
-          "verifyNote": "From third-party aggregator (nyschoolcalendar.com) \u2014 confirm on jerichoschools.org. Spring break aligns with Passover (4/19-23).",
+          "verifyNote": "Aggregator-sourced Thanksgiving/Easter/spring-recess dates conflicted with Syosset's official calendar and were removed. First day 8/31 also unconfirmed. Extract Jericho's official wall-calendar PDF from jerichoschools.org.",
           "midwinterBreak": "2027-02-15 to 2027-02-19",
           "otherBreaks": [
             {
               "range": "2026-09-21 to 2026-09-21",
-              "label": "Yom Kippur \u2014 schools closed"
+              "label": "Yom Kippur \u2014 district closed"
             },
             {
               "range": "2026-10-12 to 2026-10-12",
-              "label": "Columbus Day \u2014 schools closed"
+              "label": "Columbus Day \u2014 district closed"
             },
             {
               "range": "2026-11-11 to 2026-11-11",
-              "label": "Veterans Day \u2014 schools closed"
+              "label": "Veterans Day \u2014 district closed"
             },
             {
               "range": "2027-03-09 to 2027-03-09",
-              "label": "Eid al-Fitr \u2014 schools closed"
-            },
-            {
-              "range": "2027-03-25 to 2027-03-29",
-              "label": "Easter recess \u2014 schools closed"
+              "label": "Eid al-Fitr \u2014 district closed"
             },
             {
               "range": "2027-05-17 to 2027-05-17",
-              "label": "Eid al-Adha \u2014 schools closed"
+              "label": "Eid al-Adha \u2014 district closed"
             },
             {
               "range": "2027-06-18 to 2027-06-18",
-              "label": "Juneteenth \u2014 schools closed"
+              "label": "Juneteenth \u2014 district closed"
             }
           ]
         },
