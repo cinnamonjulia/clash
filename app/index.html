@@ -241,52 +241,124 @@
       ? MONTHS[sat.getMonth()]+" "+sat.getDate()+"–"+sun.getDate()
       : MONTHS[sat.getMonth()]+" "+sat.getDate()+" – "+MONTHS[sun.getMonth()]+" "+sun.getDate();
   }
+  // ---- summer synergy (Jun–Aug) ----
+  // Shavuot 2027 lands Fri-Sat June 11-12 — tag summer weeks that overlap it.
+  const SUMMER_CHAGIM = {"2027-06-11":"Shavuot","2027-06-12":"Shavuot"};
+  // Mondays covering both summers in the dataset: Jul-Aug 2026 and Jun-Aug 2027.
+  function summerMondays(){
+    const out=[];
+    const push=(from,to)=>{ const d=new Date(from); while(d.getDay()!==1) d.setDate(d.getDate()+1);
+      for(; d<=to; d.setDate(d.getDate()+7)) out.push(new Date(d)); };
+    push(new Date(2026,6,1), new Date(2026,7,31));
+    push(new Date(2027,5,1), new Date(2027,7,24));
+    return out;
+  }
+  // Score a Mon-Sun week: fullOut = district on summer break all 7 days.
+  function scoreSummerWeek(districts, mon){
+    const days=[...Array(7)].map((_,i)=>{ const t=new Date(mon); t.setDate(mon.getDate()+i); return t; });
+    let fullOut=0,partial=0,inSess=0,chag=null;
+    days.forEach(t=>{ if(SUMMER_CHAGIM[isoOf(t)]) chag=SUMMER_CHAGIM[isoOf(t)]; });
+    districts.forEach(d=>{
+      if(!(d.firstDay&&d.lastDay)) return;
+      const fd=toDate(d.firstDay), ld=toDate(d.lastDay);
+      const outDays=days.filter(t=>t<fd||t>ld).length;
+      if(outDays===7) fullOut++; else if(outDays>0) partial++; else inSess++;
+    });
+    return {mon,fullOut,partial,inSess,chag,total:fullOut+partial+inSess};
+  }
+  function fmtWeek(mon){
+    const sun=new Date(mon); sun.setDate(mon.getDate()+6);
+    return (mon.getMonth()===sun.getMonth()
+      ? MONTHS[mon.getMonth()]+" "+mon.getDate()+"–"+sun.getDate()
+      : MONTHS[mon.getMonth()]+" "+mon.getDate()+" – "+MONTHS[sun.getMonth()]+" "+sun.getDate())+
+      ", "+mon.getFullYear();
+  }
+
   function bestWeekendsCard(){
-    return '<section class="card" id="bestwknd"><h2>Best weekends — Sep to May</h2>'+
+    return '<section class="card" id="bestwknd"><h2 id="bwtitle">Best dates — planner</h2>'+
+      '<select id="bwmode" style="font:inherit;font-weight:600;font-size:14px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:#f2f2fb;color:var(--ink);margin:2px 0 4px;cursor:pointer;">'+
+      '<option value="year">🎒 School year — best weekends (Sep–May)</option>'+
+      '<option value="summer">☀️ Summer synergy — school\'s out (Jun–Aug)</option></select>'+
       '<p class="h2sub" id="bwsub"></p><div class="bw-grid" id="bwgrid"></div>'+
       '<button class="bwtoggle" id="bwtoggle"></button></section>';
   }
   function renderBestWeekends(districts){
-    const withData=districts.filter(hasCoreDates).length;
-    const grid=document.getElementById("bwgrid"), sub=document.getElementById("bwsub"), tog=document.getElementById("bwtoggle");
-    if(!withData){
-      sub.textContent="No districts in this view have full break dates loaded yet — rankings will appear once they're gathered.";
-      tog.style.display="none"; return;
+    const grid=document.getElementById("bwgrid"), sub=document.getElementById("bwsub"),
+      tog=document.getElementById("bwtoggle"), modeSel=document.getElementById("bwmode"),
+      title=document.getElementById("bwtitle");
+    let mode="year", showAll=false;
+
+    function jump(dt){
+      const target=document.querySelector("#view input[type=date]");
+      if(target){ target.value=isoOf(dt); target.dispatchEvent(new Event("input")); target.scrollIntoView({behavior:"smooth",block:"center"}); }
     }
-    const scored=sepMaySaturdays().map(s=>scoreWeekend(districts,s)).filter(w=>w.total>0);
-    let showAll=false;
-    sub.textContent="Weekends where teens are home, in school Fri & Mon (no break travel), ranked. "+
-      "✦ = 3-day weekend (teacher workday) — prime for overnights · ✡ = Jewish holiday, no programming. "+
-      "Based on "+withData+" of "+districts.length+" districts with full dates. Tap a weekend to load it in the checker.";
-    const pctOf = w => w.chag ? -1 : w.free/w.total; // chag weekends sink to the bottom
-    const ranked=scored.slice().sort((a,b)=> pctOf(b)-pctOf(a) || b.long3-a.long3 || a.sat-b.sat);
-    function paint(){
+    function chip(cls, rank, dateLabel, tags, meta, jumpTo){
+      const el=document.createElement("button"); el.className="bw"+cls;
+      el.innerHTML=(rank?'<span class="bw-rank">'+rank+'</span>':"")+
+        '<span class="bw-date">'+dateLabel+'</span><span class="bw-tags">'+tags+'</span>'+
+        '<span class="bw-meta">'+meta+'</span>';
+      el.addEventListener("click",()=>jump(jumpTo));
+      grid.appendChild(el);
+    }
+
+    function paintYear(){
+      title.textContent="Best weekends — Sep to May";
+      const withData=districts.filter(hasCoreDates).length;
+      if(!withData){
+        sub.textContent="No districts in this view have full break dates loaded yet — rankings will appear once they're gathered.";
+        grid.innerHTML=""; tog.style.display="none"; return;
+      }
+      tog.style.display="";
+      const scored=sepMaySaturdays().map(s=>scoreWeekend(districts,s)).filter(w=>w.total>0);
+      sub.textContent="Weekends where teens are home, in school Fri & Mon (no break travel), ranked. "+
+        "✦ = 3-day weekend (teacher workday) — prime for overnights · ✡ = Jewish holiday, no programming. "+
+        "Based on "+withData+" of "+districts.length+" districts with full dates. Tap a weekend to load it in the checker.";
+      const pctOf = w => w.chag ? -1 : w.free/w.total; // chag weekends sink to the bottom
+      const ranked=scored.slice().sort((a,b)=> pctOf(b)-pctOf(a) || b.long3-a.long3 || a.sat-b.sat);
       grid.innerHTML="";
-      const list = showAll ? scored : ranked.slice(0,10);
-      list.forEach((w,i)=>{
+      (showAll?scored:ranked.slice(0,10)).forEach((w,i)=>{
         const pct=w.free/w.total;
-        const el=document.createElement("button"); el.className="bw"+(pct===1&&!w.chag?" perfect":"");
-        const rank = showAll ? "" : '<span class="bw-rank">#'+(i+1)+'</span>';
-        let tags;
-        if(w.chag){
-          tags='<span class="st risky">✡ '+w.chag+'</span>';
-        } else {
-          tags='<span class="st '+(pct===1?"great":pct>=0.8?"flex":pct>=0.5?"school":"risky")+'">'+
-            w.free+"/"+w.total+" free</span>";
+        let tags, meta;
+        if(w.chag){ tags='<span class="st risky">✡ '+w.chag+'</span>'; meta="Jewish holiday — no programming"; }
+        else {
+          tags='<span class="st '+(pct===1?"great":pct>=0.8?"flex":pct>=0.5?"school":"risky")+'">'+w.free+"/"+w.total+" free</span>";
           if(w.long3>0) tags+='<span class="st flex">✦ 3-day for '+w.long3+'</span>';
+          meta = w.busy>0 ? w.busy+" on break / traveling" : "All clear";
         }
-        el.innerHTML=rank+'<span class="bw-date">'+fmtWknd(w.sat)+'</span>'+
-          '<span class="bw-tags">'+tags+'</span>'+
-          (w.chag?'<span class="bw-meta">Jewish holiday — no programming</span>'
-            : w.busy>0?'<span class="bw-meta">'+w.busy+' on break / traveling</span>':'<span class="bw-meta">All clear</span>');
-        el.addEventListener("click",()=>{
-          const target=document.querySelector("#view input[type=date]");
-          if(target){ target.value=isoOf(w.sat); target.dispatchEvent(new Event("input")); target.scrollIntoView({behavior:"smooth",block:"center"}); }
-        });
-        grid.appendChild(el);
+        chip(pct===1&&!w.chag?" perfect":"", showAll?"":"#"+(i+1), fmtWknd(w.sat), tags, meta, w.sat);
       });
       tog.textContent = showAll ? "Show top 10 only" : "Show all "+scored.length+" weekends (Sep–May)";
     }
+
+    function paintSummer(){
+      title.textContent="Summer synergy — school's out";
+      const withData=districts.filter(d=>d.firstDay&&d.lastDay).length;
+      if(!withData){
+        sub.textContent="No districts in this view have first/last days loaded yet — the summer window will appear once they're gathered.";
+        grid.innerHTML=""; tog.style.display="none"; return;
+      }
+      tog.style.display="";
+      const scored=summerMondays().map(m=>scoreSummerWeek(districts,m)).filter(w=>w.total>0);
+      sub.textContent="Full weeks (Mon–Sun) ranked by how many districts are completely out of session — the shared "+
+        "window for summer programs, trips & internships. ✡ = Shavuot week. Based on "+withData+" of "+
+        districts.length+" districts with first/last days. Tap a week to load its Monday in the checker.";
+      const ranked=scored.slice().sort((a,b)=>
+        (b.fullOut/b.total)-(a.fullOut/a.total) || (a.chag?1:0)-(b.chag?1:0) || a.mon-b.mon);
+      grid.innerHTML="";
+      (showAll?scored:ranked.slice(0,10)).forEach((w,i)=>{
+        const pct=w.fullOut/w.total;
+        let tags='<span class="st '+(pct===1?"great":pct>=0.8?"flex":pct>=0.5?"school":"risky")+'">'+
+          w.fullOut+"/"+w.total+" out all week</span>";
+        if(w.chag) tags+='<span class="st risky">✡ '+w.chag+'</span>';
+        const meta = pct===1 ? "Everyone's out — full synergy"
+          : (w.inSess?w.inSess+" still in session":"")+(w.inSess&&w.partial?" · ":"")+(w.partial?w.partial+" partial week":"");
+        chip(pct===1&&!w.chag?" perfect":"", showAll?"":"#"+(i+1), fmtWeek(w.mon), tags, meta, w.mon);
+      });
+      tog.textContent = showAll ? "Show top 10 only" : "Show all "+scored.length+" summer weeks";
+    }
+
+    function paint(){ mode==="year" ? paintYear() : paintSummer(); }
+    modeSel.addEventListener("change",()=>{ mode=modeSel.value; showAll=false; paint(); });
     tog.addEventListener("click",()=>{ showAll=!showAll; paint(); });
     paint();
   }
