@@ -3,8 +3,9 @@
 A planning tool for **BBYO**: key 2026–27 school dates for the districts where every
 region has chapters, so events don't collide with school schedules.
 
-Started with Eastern Region (NC / SC / VA) and now covers **all 36 BBYO regions &
-councils** pulled from bbyo.org.
+Started with Eastern Region (NC / SC / VA) and now covers **all 36 US BBYO regions &
+councils** pulled from bbyo.org, plus **Northwest Canada Region** (Vancouver, Calgary,
+Edmonton & Winnipeg) — 37 in total.
 
 ## What's here
 
@@ -19,8 +20,8 @@ councils** pulled from bbyo.org.
 
 ## Status
 
-**All 36 regions populated** — 359 districts (122 fully verified from official
-calendars, 237 flagged ⚠️ for extraction or confirmation), including 47 Jewish day
+**All 37 regions populated** — 366 districts (123 fully verified from official
+calendars, 243 flagged ⚠️ for extraction or confirmation), including 49 Jewish day
 schools awaiting their 2026–27 calendars (most publish in late summer 2026).
 
 ## Next steps

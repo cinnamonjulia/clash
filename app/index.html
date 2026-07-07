@@ -146,7 +146,8 @@
 <script>
   const DATA = window.CALENDER_DATA;
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  const STATE_NAMES = {AL:"Alabama",AZ:"Arizona",CA:"California",CO:"Colorado",CT:"Connecticut",DC:"Washington DC",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",IA:"Iowa",IL:"Illinois",IN:"Indiana",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",MA:"Massachusetts",MD:"Maryland",ME:"Maine",MI:"Michigan",MN:"Minnesota",MO:"Missouri",MS:"Mississippi",NC:"North Carolina",NE:"Nebraska",NH:"New Hampshire",NJ:"New Jersey",NY:"New York",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",TN:"Tennessee",TX:"Texas",VA:"Virginia",WA:"Washington",WI:"Wisconsin",WV:"West Virginia"};
+  const STATE_NAMES = {AL:"Alabama",AZ:"Arizona",CA:"California",CO:"Colorado",CT:"Connecticut",DC:"Washington DC",DE:"Delaware",FL:"Florida",GA:"Georgia",HI:"Hawaii",IA:"Iowa",IL:"Illinois",IN:"Indiana",KS:"Kansas",KY:"Kentucky",LA:"Louisiana",MA:"Massachusetts",MD:"Maryland",ME:"Maine",MI:"Michigan",MN:"Minnesota",MO:"Missouri",MS:"Mississippi",NC:"North Carolina",NE:"Nebraska",NH:"New Hampshire",NJ:"New Jersey",NY:"New York",OH:"Ohio",OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",TN:"Tennessee",TX:"Texas",VA:"Virginia",WA:"Washington",WI:"Wisconsin",WV:"West Virginia",BC:"British Columbia",AB:"Alberta",MB:"Manitoba"};
+  const CA_PROVINCES = {BC:1,AB:1,MB:1,ON:1,QC:1};
   const DEFAULT_DATE = "2026-12-25";
 
   // ---- date helpers ----
@@ -157,12 +158,13 @@
     return da.getMonth()===db.getMonth() ? MONTHS[da.getMonth()]+" "+da.getDate()+"–"+db.getDate()
       : MONTHS[da.getMonth()]+" "+da.getDate()+" – "+MONTHS[db.getMonth()]+" "+db.getDate(); }
   function inRange(dt,r){ if(!r) return false; const [a,b]=r.split(" to "); return dt>=toDate(a)&&dt<=toDate(b); }
-  // National holidays every district takes off (rarely in the data since schools are
+  // US national holidays every district takes off (rarely in the data since schools are
   // closed anyway) — treated like MLK: the adjacent weekend is a family-travel risk.
+  // Canadian districts carry their own stat holidays (Labour/Family/Victoria Day) in otherBreaks.
   const NATIONAL_HOLIDAYS = {"2026-09-07":"Labor Day (may travel)","2027-05-31":"Memorial Day (may travel)"};
   // Is this date a multi-day break / holiday closure (not a weekend)? Returns a label or null.
   function breakLabel(d,dt){
-    if(NATIONAL_HOLIDAYS[isoOf(dt)]) return NATIONAL_HOLIDAYS[isoOf(dt)];
+    if(!CA_PROVINCES[d.state] && NATIONAL_HOLIDAYS[isoOf(dt)]) return NATIONAL_HOLIDAYS[isoOf(dt)];
     if(d.firstDay&&d.lastDay&&(dt<toDate(d.firstDay)||dt>toDate(d.lastDay))) return "Summer break";
     if(inRange(dt,d.fallBreak)) return "Fall break";
     if(inRange(dt,d.midwinterBreak)) return "Mid-winter break";

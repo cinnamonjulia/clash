@@ -2,7 +2,7 @@
   "order": "BBYO",
   "schoolYear": "2026-2027",
   "lastGathered": "2026-07-06",
-  "note": "Region list + coverage/chapter cities pulled from bbyo.org. All 36 regions now populated: anchor districts carry verified 2026-27 dates from official calendars (verify:false), aggregator/partial entries are flagged verify:true, and remaining hub districts are scaffolded with source links + verify flags for later extraction.",
+  "note": "Region list + coverage/chapter cities pulled from bbyo.org (plus Northwest Canada). All 37 regions populated: anchor districts carry verified 2026-27 dates from official calendars (verify:false), aggregator/partial entries are flagged verify:true, and remaining hub districts are scaffolded with source links + verify flags for later extraction.",
   "regions": [
     {
       "id": "eastern",
@@ -6288,6 +6288,205 @@
         }
       ],
       "coverage": "Northern Virginia (Arlington, Fairfax, Loudoun)"
+    },
+    {
+      "id": "northwest-canada",
+      "name": "Northwest Canada Region",
+      "states": [
+        "BC",
+        "AB",
+        "MB"
+      ],
+      "status": "populated",
+      "districts": [
+        {
+          "id": "vsb-bc",
+          "name": "Vancouver School Board (SD39)",
+          "chapterCity": "Vancouver",
+          "state": "BC",
+          "firstDay": "2026-09-08",
+          "lastDay": "2027-06-29",
+          "thanksgivingBreak": "2026-10-12 to 2026-10-12",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-15 to 2027-03-29",
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-09-21",
+            "2026-10-23",
+            "2026-11-20",
+            "2027-02-12",
+            "2027-04-19",
+            "2027-05-21"
+          ],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.vsb.bc.ca/school-year-calendar",
+          "verifyNote": "Thanksgiving = Canadian Thanksgiving (10/12). Two-week spring break runs into Good Friday/Easter Monday (3/26, 3/29). 9/21 PD day falls on Yom Kippur. Last day 6/29 inferred (6/30 is the administrative day) \u2014 confirm.",
+          "otherBreaks": [
+            {
+              "range": "2026-09-07 to 2026-09-07",
+              "label": "Labour Day \u2014 no school"
+            },
+            {
+              "range": "2026-09-30 to 2026-09-30",
+              "label": "National Day for Truth & Reconciliation \u2014 no school"
+            },
+            {
+              "range": "2026-11-11 to 2026-11-11",
+              "label": "Remembrance Day \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Family Day \u2014 no school"
+            },
+            {
+              "range": "2027-05-24 to 2027-05-24",
+              "label": "Victoria Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "cbe-ab",
+          "name": "Calgary Board of Education",
+          "chapterCity": "Calgary",
+          "state": "AB",
+          "firstDay": "2026-08-31",
+          "lastDay": "2027-06-25",
+          "thanksgivingBreak": "2026-10-12 to 2026-10-12",
+          "winterBreak": "2026-12-21 to 2027-01-01",
+          "springBreak": "2027-03-22 to 2027-03-29",
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [
+            "2026-09-25",
+            "2026-10-19",
+            "2026-11-27",
+            "2027-01-29",
+            "2027-02-11",
+            "2027-02-12",
+            "2027-02-26",
+            "2027-03-19",
+            "2027-05-21"
+          ],
+          "halfDays": [],
+          "verify": false,
+          "source": "https://cbe.ab.ca/registration/calendars/Documents/2026-2027-Instructional-Calendar.pdf",
+          "verifyNote": "Thanksgiving = Canadian Thanksgiving (10/12). Fall Break 11/11-15 (Remembrance Day through the weekend); Teachers' Convention 2/11-12.",
+          "fallBreak": "2026-11-11 to 2026-11-13",
+          "otherBreaks": [
+            {
+              "range": "2026-09-07 to 2026-09-07",
+              "label": "Labour Day \u2014 no school"
+            },
+            {
+              "range": "2026-09-30 to 2026-09-30",
+              "label": "National Day for Truth & Reconciliation \u2014 no school"
+            },
+            {
+              "range": "2027-02-15 to 2027-02-15",
+              "label": "Family Day \u2014 no school"
+            },
+            {
+              "range": "2027-05-24 to 2027-05-24",
+              "label": "Victoria Day \u2014 no school"
+            }
+          ]
+        },
+        {
+          "id": "richmond-bc",
+          "name": "Richmond School District (SD38)",
+          "chapterCity": "Richmond, BC",
+          "state": "BC",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.sd38.bc.ca",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "epsb-ab",
+          "name": "Edmonton Public Schools",
+          "chapterCity": "Edmonton",
+          "state": "AB",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.epsb.ca",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "pembinatrails-mb",
+          "name": "Pembina Trails School Division",
+          "chapterCity": "Winnipeg",
+          "state": "MB",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.pembinatrails.ca",
+          "verifyNote": "2026-27 dates not yet extracted."
+        },
+        {
+          "id": "kdhs-ds",
+          "name": "King David High School",
+          "chapterCity": "Vancouver",
+          "state": "BC",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.kdhs.org",
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "type": "dayschool"
+        },
+        {
+          "id": "grayacademy-ds",
+          "name": "Gray Academy of Jewish Education",
+          "chapterCity": "Winnipeg",
+          "state": "MB",
+          "firstDay": null,
+          "lastDay": null,
+          "thanksgivingBreak": null,
+          "winterBreak": null,
+          "springBreak": null,
+          "mlkDay": null,
+          "graduation": null,
+          "teacherWorkdays": [],
+          "halfDays": [],
+          "verify": true,
+          "source": "https://www.grayacademy.ca",
+          "verifyNote": "Day-school calendar for 2026-27 not yet posted \u2014 check late summer 2026.",
+          "type": "dayschool"
+        }
+      ],
+      "coverage": "Western Canada \u2014 Vancouver, Calgary, Edmonton & Winnipeg"
     },
     {
       "id": "ohio-northern",
